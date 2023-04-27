@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
 import ChordSelector from "./ChordSelector";
 import useChord from "../../../../Hooks/useChord";
-import { Chord } from "tonal";
+import { Chord, Note } from "tonal";
+import { Tchord } from 'bring/ts/types';
 
 const ChordSeq = ({ setProg, savedChords }) => {
+  //TODO investigate bars
   const [bars, setBars] = useState(1);
-  const [seq, setSeq] = useState([...Array(16).fill(null)]);
+
+  const [seq, setSeq] = useState([...Array(16).fill(1)]);
   let [step, setStep] = useState(null)
   const [showSelector, setShowSelector] = useState(false);
   const [chordNames, setChordNames] = useState([]);
-  const chord = useChord();
+  const chord: Tchord = useChord();
 
   useEffect(() => {
     console.log('saved Chord Prog', savedChords)
     if (savedChords?.length > 0) {
       let oldChords = [...Array(16).fill(null)];
+      //TODO
+      //!
+      //foreach much more performant
       for (let i = 0; i < savedChords.length; i++) {
         if (savedChords[i]) {
           let chordRoot = savedChords[i][0].slice(0, chord.rootNote.length - 1);
@@ -31,7 +37,7 @@ const ChordSeq = ({ setProg, savedChords }) => {
   const handleBars = (e) => {
     let barsN = Number(e.target.value)
     setBars(barsN)
-    setSeq([...Array(barsN * 16).fill(null)])
+    setSeq([...Array(barsN * 16).fill(1)])
     setChordNames([...Array(barsN * 16).fill(null)]);
     setProg([...Array(barsN * 16).fill(null)])
   }
@@ -60,12 +66,13 @@ const ChordSeq = ({ setProg, savedChords }) => {
   }
 
   function removeChord(e) {
-    console.log(e.target.id);
-    let prevSeq = seq;
+    console.log("cord to remove: ", e.target.id);
+    const prevSeq = seq;
+    //! wtf
     prevSeq[e.target.id] = null;
     setSeq([...prevSeq]);
     setProg([...prevSeq]);
-    let prevNames = chordNames;
+    const prevNames = chordNames;
     prevNames[e.target.id] = null;
     setChordNames([...prevNames]);
   }
@@ -89,10 +96,12 @@ const ChordSeq = ({ setProg, savedChords }) => {
           <span className="text-white text-md mr-2 w-[50px]">Steps: </span>
 
           <div className="relative flex justify-between w-full">
-            {seq.map((el, i) => {
-              return <>
-                <div className="relative">
-                  <div id={i}
+            {seq.map((_, i) => {
+
+            return (
+
+                <div key={"seq"+i} className="relative">
+                  <div id={i.toString()}
                     onClick={(e) => handleStepClick(e)}
                     className="inline hover:opacity-100 hover:bg-fuchsia-500 opacity-80 rounded min-w-[50px] h-fit text-white bg-fuchsia-600
                     flex flex-col">
@@ -101,10 +110,10 @@ const ChordSeq = ({ setProg, savedChords }) => {
                   <div className="">
                     <button className={`opacity-70 hover:opacity-100 absolute -top-3 -right-2
                     ${chordNames[i] ? 'visible' : 'invisible'}`}
-                      id={i} onClick={(e) => removeChord(e)}>⛔</button>
+                      id={i.toString()} onClick={(e) => removeChord(e)}>⛔</button>
                   </div>
                 </div>
-              </>
+              )
             })}
             {showSelector &&
               <div className={`w-full absolute top-11 z-10 p-3`}>

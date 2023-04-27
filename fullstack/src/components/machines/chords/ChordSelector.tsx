@@ -41,7 +41,8 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
             name='octave' id='octave-root'
             className='text-fuchsia-950 rounded-lg mx-2'>
             <option selected value>--none--</option>
-            <option>2</option><option>3</option>
+            <option>2</option>
+            <option>3</option>
           </select>
         </label>
         <label>Root:
@@ -72,7 +73,7 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
         </label>
         <button type='submit'>Add Chord</button>
       </form>
-     
+
     </div>
   );
 }

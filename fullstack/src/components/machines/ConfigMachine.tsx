@@ -1,30 +1,46 @@
 import BankSelect from "./BankSelect";
 import kits from '../../../libs/drumkits';
 import padSounds from '../../../libs/padSounds';
-import { useEffect, useState } from "react";
-import ChordSeq from "bring/components/machines/chords/ChordSeq";
+import { useEffect, useState, FC} from "react";
+import ChordSeq from "../machines/chords/ChordSeq";
 import Master from "bring/components/machines/master/Master";
 
+//TODO
+export type ConfigMachineProps = {
+  savedSamples: {
+    name: string,
+    url: string
+  },
+  savedDrumTracks: [],
+  savedChordProg: [],
+  savedPadSound: {
+    name: string,
+    url: string
+  }
+}
 
-const ConfigMachine = ({savedSamples, savedDrumTracks, savedChordProg, savedPadSound}) => {
+const ConfigMachine = ({savedSamples, savedDrumTracks, savedChordProg, savedPadSound}: ConfigMachineProps) => {
   const [drums, setDrums] = useState(kits[0]); // Default
   const [pad, setPad] = useState({ name: '', url: padSounds[0]}) // Default
   const [prog, setProg] = useState([]);
 
   useEffect(() => {
     if (savedDrumTracks?.length) {
+
       setDrums(savedSamples)
     }
     if (savedChordProg?.length) {
+
       setProg(savedChordProg)
     }
     if (savedPadSound?.url) {
+
       setPad(savedPadSound)
     }
 
   }, [savedChordProg, savedPadSound, savedDrumTracks, savedSamples]);
-  
- 
+
+
 
 return (
   <>
@@ -42,8 +58,6 @@ return (
         </div>
       </div>
     </div>
-
-
   </>
 )
 }

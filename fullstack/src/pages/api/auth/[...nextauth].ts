@@ -13,10 +13,10 @@ export default NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }),
-  ], 
+  ],
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET
   },
-  sercret: process.env.NEXTAUTH_SECRET,
-  
+  secret: process.env.NEXTAUTH_SECRET,
 })
+//TODO ask paola about her super secret secret fix env typing

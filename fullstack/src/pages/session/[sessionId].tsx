@@ -96,18 +96,20 @@ const SessionDetail = () => {
   }, [sessionId])
 
   return (
-    <div className="text-fuchsia-100 mt-5">
-      <div className="flex justify-between items-end">
-        <h1 className="text-fuchsia-500 text-2xl inline" >{currentSession.name}</h1>
-        <span className="text-xs opacity-70">Created on: <span className="text-fuchsia-500">{moment(currentSession.creationDate).format('MMM Do, YYYY')}</span></span>
-      </div>
-      {/* <SessionMaster /> */}
 
-      <ConfigMachine savedSamples={samples} savedChordProg={chordProg} savedDrumTracks={drumTracks} savedPadSound={padSound[0]}/>
-      
-      {/* <Master samples={samples} chordProg={chordProg} padSound={padSound} drumTracks={drumTracks}></Master> */}
+    <div className="text-fuchsia-100 mt-5">
+    <div className="flex justify-between items-end">
+    <h1 className="text-fuchsia-500 text-2xl inline" >{currentSession.name}</h1>
+    <span className="text-xs opacity-70">Created on: <span className="text-fuchsia-500">{moment(currentSession.creationDate).format('MMM Do, YYYY')}</span></span>
+    </div>
+    {/* <SessionMaster /> */}
+
+    <ConfigMachine savedSamples={samples} savedChordProg={chordProg} savedDrumTracks={drumTracks} savedPadSound={padSound[0]}/>
+
+    {/* <Master samples={samples} chordProg={chordProg} padSound={padSound} drumTracks={drumTracks}></Master> */}
 
     </div>
+
   );
 }
 

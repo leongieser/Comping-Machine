@@ -19,7 +19,7 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
   // References
   const tracksRef = useRef([]) // the sampler for each track
   const stepsRef = useRef([[]])
-  const seqRef = useRef(null)
+  const seqRef = useRef(null) //TODO replace andrefactor at the map thingy
   const lightRef = useRef([]);
   const isMuted = useState([])
 
@@ -52,6 +52,7 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
       howlerSampler.getSamples();
     },
     onloaderror() {
+
       console.log('Error loading Howler audio: ')
     }
   })
@@ -196,7 +197,7 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
   }
 
   const saveSession = () => {
-    // console.log(typeof stepsRef.current[0], stepsRef.current[0]) //Each element of this array contains the track-stepId info 
+    // console.log(typeof stepsRef.current[0], stepsRef.current[0]) //Each element of this array contains the track-stepId info
     // console.log(samples.sounds[0].url.match(/^\/[a-z]+\/([\w\d-]+)/)) // What I really need is the samples 😅 But it was fun
     // console.log(samples.name);
     // console.log('chord Prog from master when saving', chordProg)
@@ -218,7 +219,7 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
         <div className='mt-8 flex justify-around'>
 
           <button onClick={handlePlay}
-            className={`w-[60px]  rounded p-3 mx-5  ring shadow 
+            className={`w-[60px]  rounded p-3 mx-5  ring shadow
                       ${isPlaying ? 'translate-y-0.5' : '-translate-y-0.5'}
                       ${isPlaying ? 'bg-rose-800 opacity-100 text-rose-100' : 'bg-emerald-950 opacity-90 text-emerald-100'}
                       ${isPlaying ? 'shadow-rose-600 shadow-xl' : 'shadow-emerald-600 shadow-lg'}
@@ -271,7 +272,7 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
                       stepIds.map((stepId) => {
                         const id = trackId + "-" + stepId;
                         return (
-                          <label className='inline'>
+                          <label key={"labelFor"+id} className='inline'>
                             <input
                               key={id}
                               id={id}
@@ -288,8 +289,8 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
                               className='h-10 w-10
                                 bg-fuchsia-200 rounded border-fuchsia-400 text-fuchsia-500 checked:ring-fuchsia-900 opacity:70 checked:opacity-100 shadow shadow-md
                                 hover:bg-fuchsia-300 checked:shadow-fuchsia-200 checked:shadow-fuchsia-800 checked:shadow-xl focus:border-1 shadow-fuchsia-800  '
-                            
-                             
+
+
                             />
 
                           </label>
@@ -303,7 +304,7 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
                       stepIds.map((stepId) => {
                         const id = trackId + "-" + stepId;
                         return (
-                          <label className='inline'>
+                          <label key={"labelFor"+id }className='inline'>
                             <input
                               key={id}
                               id={id}
@@ -334,7 +335,7 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
         {/* lights */}
         <div className='absolute right-7 top-0 invisible lg:visible md:visible '>
           {stepIds.map((stepId) => (
-            <label className="">
+            <label key={"labelFor"+stepId} className="">
               <input
                 type="radio"
                 name="lamp"

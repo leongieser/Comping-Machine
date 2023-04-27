@@ -7,23 +7,30 @@ import axios from "axios";
 
 const SaveModal = ({ soundbankName, stepsRef, prog, padSound }) => {
   const saveModal = useSaveModal(); //the custom hook
+  let session = useSession();
+  let curatedprog = [];
+
   const [sessionName, setSessionName] = useState('')
   const [isLoading, setIsLoading] = useState('');
   const [id, setId] = useState(null);
+
+  // {} instead of null?
   const [sessionToSave, setSessionToSave] = useState(null)
 
-  let session = useSession();
+
   // console.log(session);
-  let curatedprog = [];
+
   // null elements become empty strings.
   if (prog) {
     prog.forEach((el, i) => {
+      // if(!el)
       if (el === null) curatedprog.push('');
       else curatedprog.push(el.join('.'))
     })
   }
 
   useEffect(() => {
+    //control setIsLoading true once lo
     console.log('session before : ', session)
     if (session.data) {
       localStorage.setItem('user', JSON.stringify(session.data))
@@ -32,8 +39,9 @@ const SaveModal = ({ soundbankName, stepsRef, prog, padSound }) => {
     }
     console.log('session in save modal : ', session)
     setId(session.data.user.id);
+
   }, [])
-  
+
   useEffect(() => {
     setSessionToSave({
       name: sessionName,
@@ -43,12 +51,12 @@ const SaveModal = ({ soundbankName, stepsRef, prog, padSound }) => {
       pad_track: curatedprog ? curatedprog : ['not', 'found'],
       pad_sound: padSound
     })
-    
+
   },[sessionName, id])
 
 
   useEffect(() => console.log('newSession : ', sessionToSave), [sessionToSave])
-  
+
 
   // console.log('chord prog: ', typeof prog, prog)
   // console.log('curated chord prog: ', typeof curatedprog, curatedprog)
