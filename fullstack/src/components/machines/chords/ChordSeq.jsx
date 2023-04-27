@@ -78,7 +78,7 @@ const ChordSeq = ({ setProg, savedChords }) => {
             <select onChange={(e) => handleBars(e)} className="text-fuchsia-950 rounded-lg ml-6 mb-2">
               <option>1</option>
               {/* I didn't had the time expand the logic to use more than one measure (16 steps) in the sequence of the chords. The plan is to implement it */}
-              <option>2</option> 
+              <option>2</option>
               <option>4</option>
               <option>16</option>
               <option>32</option>
@@ -99,7 +99,7 @@ const ChordSeq = ({ setProg, savedChords }) => {
                     {i + 1}
                   </div>
                   <div className="">
-                    <button className={`opacity-70 hover:opacity-100 absolute -top-3 -right-2 
+                    <button className={`opacity-70 hover:opacity-100 absolute -top-3 -right-2
                     ${chordNames[i] ? 'visible' : 'invisible'}`}
                       id={i} onClick={(e) => removeChord(e)}>⛔</button>
                   </div>
@@ -117,8 +117,8 @@ const ChordSeq = ({ setProg, savedChords }) => {
           <div className="flex justify-between items-center w-full ">
             <span className="text-white text-md -mr-3 w-[50px] ">Chart: </span>
             {chordNames.map((name) => {
-              return <div className="text-fuchsia-950 bg-fuchsia-200 px-1 inline opacity-80 rounded w-[50px] y-[50px] text-sm
-                    ">{name}
+              return <div key={name} className="text-fuchsia-950 bg-fuchsia-200 px-1 inline opacity-80 rounded w-[50px] y-[50px] text-sm">
+                {name}
               </div>
             })}
           </div>
