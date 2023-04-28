@@ -9,6 +9,9 @@ const Modal = ({ isOpen, onClose, action, title, actionLabel, disabled, setData 
     sName: '' //session name
   })
 
+  //TODO refactor modal component so it is truly reusable and takes in a form component
+  // eg login or save / reload session
+
   const handleClose = useCallback(() => {
     if (disabled) {
       return;
@@ -33,7 +36,7 @@ const Modal = ({ isOpen, onClose, action, title, actionLabel, disabled, setData 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData) 
+    console.log(formData)
     action()
     onClose();
     setFormData({sName: ''})
@@ -59,7 +62,7 @@ const Modal = ({ isOpen, onClose, action, title, actionLabel, disabled, setData 
         focus:outline-none
         bg-neutral-800
         bg-opacity-70
-        
+
       ">
         {/* responsive madness happening down here: */}
         <div className="
@@ -120,7 +123,7 @@ const Modal = ({ isOpen, onClose, action, title, actionLabel, disabled, setData 
                   </div>
                 </form>
               </div>
-              
+
               :
               <div className="flex flex-col gap-2 p-10" >
                 <Button

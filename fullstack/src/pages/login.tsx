@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSession, signOut } from 'next-auth/react';
+import { useSession, signOut, signIn } from 'next-auth/react';
 import Modal from "bring/components/Modal";
 import { useRouter } from "next/router";
 import axios from 'axios'
@@ -9,9 +9,9 @@ const login = () => {
   const router = useRouter();
 
   useEffect(() => {
- 
+
       localStorage.setItem("session", JSON.stringify(session));
-    
+
   }, [session])
 
   const registerUser = async (newUser) => {
@@ -50,6 +50,10 @@ const login = () => {
     );
   } else {
     return (
+      // <div>
+      //   <button id="findMe" onClick={() => signIn()}>as-diahsiodhasodhioasd
+      //   </button>
+      // </div>
       <Modal isOpen title='Identify:' actionLabel="Continue with Google"
         onClose={() => router.push('/')} />
     );

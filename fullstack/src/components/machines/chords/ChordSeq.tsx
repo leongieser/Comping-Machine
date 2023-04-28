@@ -9,6 +9,7 @@ import { Chord, Note } from "tonal";
   const [bars, setBars] = useState(1);
 
   const [seq, setSeq] = useState([...Array(16).fill(null)]);
+
   let [step, setStep] = useState(null)
   const [showSelector, setShowSelector] = useState(false);
   const [chordNames, setChordNames] = useState([]);
@@ -18,14 +19,17 @@ import { Chord, Note } from "tonal";
 
   useEffect(() => {
     console.log('saved Chord Prog', savedChords)
-// if(savedChords){
-    if (savedChords?.length > 0) {
+
+    if(savedChords) {
       let oldChords = [...Array(16).fill(null)];
+      console.log('old chords', oldChords)
       //TODO
       //!
       //foreach much more performant
       for (let i = 0; i < savedChords.length; i++) {
         if (savedChords[i]) {
+
+          //should be on the chord object
           let chordRoot = savedChords[i][0].slice(0, chord.rootNote.length - 1);
           let chordName = Chord.get(`${chordRoot}${savedChords[i][1]}`).aliases[0];
           oldChords[i] = chordRoot + chordName;
@@ -35,15 +39,20 @@ import { Chord, Note } from "tonal";
     } else {
       setChordNames([...Array(16).fill(null)])
     }
+
+
   }, [savedChords])
 
   const handleBars = (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log("sq", seq)
     let barsN = Number(e.target.value)
     setBars(barsN)
-    setSeq([...Array(barsN * 16).fill(1)])
-    setChordNames([...Array(barsN * 16).fill(null)]);
-    setProg([...Array(barsN * 16).fill(null)])
+    console.log("sq", seq)
+    setSeq([...Array(barsN * 16).fill(1)]) // fill with 0 ?
+    console.log("sq after set", seq)
+    setChordNames([...Array(barsN * 16).fill(null)]); // this cannot be null
+    // barCell+i
+    // Array.from({length: 10}, (_, i) => i + 1)
 
     console.log("seq after:" , seq)
   }
@@ -81,7 +90,7 @@ import { Chord, Note } from "tonal";
     console.log("cord to remove: ", e.target.id);
     const prevSeq = seq;
     //! wtf
-    prevSeq[e.target.id] = null;
+    prevSeq[e.target.id] = null; // this should set the cord to his initial state (but not null)
     setSeq([...prevSeq]);
     setProg([...prevSeq]);
     const prevNames = chordNames;
@@ -97,10 +106,10 @@ import { Chord, Note } from "tonal";
             <select onChange={(e) => handleBars(e)} className="text-fuchsia-950 rounded-lg ml-6 mb-2">
               <option>1</option>
               {/* I didn't had the time expand the logic to use more than one measure (16 steps) in the sequence of the chords. The plan is to implement it */}
-              <option>2</option>
-              <option>4</option>
-              <option>16</option>
-              <option>32</option>
+              <option hidden >2</option>
+              <option hidden >4</option>
+              <option hidden >16</option>
+              <option hidden >32</option>
             </select>
           </label>
         </form>

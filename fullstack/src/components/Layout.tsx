@@ -1,27 +1,13 @@
-import { useSession } from "next-auth/react";
-import Navbar from "./layout/Navbar";
-import { useEffect } from "react";
+import Header from "./header"
+import Footer from "./footer"
+import type { ReactNode } from "react"
 
-const Layout = ({ children }) => {
-  const session = useSession()
-
-  useEffect(() => {
-    if (session) {
-      localStorage.setItem('session', JSON.stringify(session))
-    } else {
-      localStorage.removeItem('session')
-    }
-  }, [session])
+export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className=" bg-black w-full">
-      <div className="container  mx-auto xl:px-30 px-20">
-        <div className=" mx-auto">
-          <Navbar />
-          {children}
-        </div>
-      </div>
-    </div>
+    <>
+      {/* <Header /> */}
+      <main className='flex items-center justify-center'>{children}</main>
+
+    </>
   )
 }
-
-export default Layout;
