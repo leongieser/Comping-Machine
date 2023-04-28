@@ -253,7 +253,8 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
 
                   <div key={trackId} className='flex my-2 items-center'>
                     <button
-                      id={trackId}
+                    //!changed by leonor
+                      id={trackId.toString()}
                       onClick={(e) => { muteTrack(e), { passive: true } }} // passive true... Very nice feature!
                       className="text-emerald-100 text-sm flex flex-col justify-center items-center
                         w-[100px] ring ring-1  p-1 mx-3 rounded shadow-lg ring-emerald-400 shadow-emerald-500/50 hover:bg-emerald-300 hover:text-white"
@@ -264,7 +265,7 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
                       }
 
                     </button>
-                    <button id={trackId} onClick={(e) => playSample(e)}
+                    <button id={trackId.toString()} onClick={(e) => playSample(e)}
                       className='w-fit mr-3 text-md ring-1 ring-sky-500 text-sky-400 p-1  rounded
                                 shadow-md shadow-sky-900 hover:bg-sky-700 hover:shadow-sky-700 hover:shadow-lg hover:text-white'
                     >►</button>

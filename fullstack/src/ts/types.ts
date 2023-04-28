@@ -1,11 +1,11 @@
-type User = {
+export type User = {
   id:         string,
   username?:  string
   email:      string,
   sessions:   Session[]
 }
 
-type Session = {
+export type Session = {
   id:           String,
   name:         String,
   creationDate: Date,
@@ -15,9 +15,9 @@ type Session = {
   // drum_tracks drumtrack?
 }
 
-export type Tchord = {
-  chordType: string,
+export type TChord = {
+  chortType: string,
   rootNote: string,
-  updateType: () => void,
-  updateRoot: () => void
+  updateType: (type: string) => void,
+  updateRoot: (note: string) => void
 }

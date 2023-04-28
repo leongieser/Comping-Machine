@@ -1,17 +1,19 @@
-const chordTypes = require('../../../../libs/chordTypes');
+// const chordTypes = require('../../../../libs/chordTypes');
+import { commonChords, altDomChords, moreChords} from '../../../../libs/chordTypes';
 import { useState, useEffect } from 'react';
-import useChord from '../../../../Hooks/useChord';
+import {useChordStore} from '../../../../Hooks/useChord';
 
 const ChordSelector = ({ setShowSelector, addChord}) => {
   const [selectedType, setSelectedType] = useState('');
   const [selectedRoot, setSelectedRoot] = useState('');
   const [selectedOctave, setSelectedOctave] = useState('');
-  const chord = useChord()
+  const chord = useChordStore()
 
+  // https://freshman.tech/snippets/typescript/fix-value-not-exist-eventtarget/
 
   const rootSelect = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'E#', 'Fb', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B', 'B#', 'Cb'];
 
-  const buildChord = (e) => {
+  const buildChord = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedType(e.target.value);
     let rNote = selectedRoot + selectedOctave;
     let type = e.target.value;
@@ -19,11 +21,10 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
     chord.updateType(type);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setShowSelector(false);
-    if (selectedType === '--none--' || selectedOctave === '--none--' || selectedRoot === '--none--') return
-    else addChord();
+    addChord();
   }
 
   return (
@@ -40,8 +41,8 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
             onChange={(e) => setSelectedOctave(e.target.value)}
             name='octave' id='octave-root'
             className='text-fuchsia-950 rounded-lg mx-2'>
-            <option selected value>--none--</option>
-            <option>2</option>
+            {/* <option selected hidden disabled value="--none--"></option> */}
+            <option selected value="2">2</option>
             <option>3</option>
           </select>
         </label>
@@ -50,8 +51,9 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
             onChange={(e) => setSelectedRoot(e.target.value)}
             name='root' id='note-root'
             className='text-fuchsia-950 rounded-lg mx-2'>
-            <option selected value>--none--</option>
-            {rootSelect.map(root => <option>{root}</option>)}
+            {<option>{rootSelect[0]}</option>}
+            {rootSelect.slice(1).map(root => <option key={root}>{root}</option>)}
+
           </select>
         </label>
         <label>Type:
@@ -59,15 +61,15 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
             onChange={(e) => buildChord(e)}
             name='type' id='chord-type'
             className='text-fuchsia-950 rounded-lg mx-2'>
-            <option selected value>--none--</option>
             <optgroup label="Everyday Chords: ">
-              {chordTypes.commonChords.map(type => <option>{type}</option>)}
+            {<option>{commonChords[0]}</option>}
+            {commonChords.slice(1).map(type => <option key={type}>{type}</option>)}
             </optgroup>
             <optgroup label="Altered Dominant Chords: ">
-              {chordTypes.altDomChords.map(type => <option>{type}</option>)}
+              {altDomChords.map(type => <option key={type}>{type}</option>)}
             </optgroup>
             <optgroup label="Other Chords: ">
-              {chordTypes.moreChords.map(type => <option>{type}</option>)}
+              {moreChords.map(type => <option key={type}>{type}</option>)}
             </optgroup>
           </select>
         </label>

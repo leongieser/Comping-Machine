@@ -1,9 +1,13 @@
 import BankSelect from "./BankSelect";
 import kits from '../../../libs/drumkits';
 import padSounds from '../../../libs/padSounds';
-import { useEffect, useState, FC} from "react";
+//!changed
+//import bankBuilder from '../../../libs/padSounds';
+import { useEffect, useState } from "react";
 import ChordSeq from "../machines/chords/ChordSeq";
 import Master from "bring/components/machines/master/Master";
+
+
 
 //TODO
 export type ConfigMachineProps = {
@@ -15,6 +19,8 @@ export type ConfigMachineProps = {
   savedChordProg: [],
   savedPadSound: {
     name: string,
+    //!changed --> should maybe be typeof bankBuilder
+	  //                                  ^ but probably not
     url: string
   }
 }
@@ -44,17 +50,17 @@ const ConfigMachine = ({savedSamples, savedDrumTracks, savedChordProg, savedPadS
 
 return (
   <>
-    <ChordSeq setProg={setProg} savedChords={savedChordProg}/>
+    <ChordSeq key={"cordSequencer"} setProg={setProg} savedChords={savedChordProg}/>
     <div className="container flex m-10 justify-around w-full items-start p-5">
-      <Master samples={drums} padSound={pad} chordProg={prog} drumTracks={savedDrumTracks}/>
+      <Master key={"master"} samples={drums} padSound={pad} chordProg={prog} drumTracks={savedDrumTracks}/>
       <div>
         <div className="bg-fuchsia-300 p-2 rounded my-10 shadow shadow-lg shadow-sky-700">
           <span className="text-fuchsia-950">DrumKit: </span>
-          <BankSelect soundBank={kits} setSound={setDrums} soundName={drums.name} />
+          <BankSelect key={"bankSelectDrum"} soundBank={kits} setSound={setDrums} soundName={drums.name} />
         </div>
         <div className="bg-emerald-200 p-2 rounded shadow shadow-lg shadow-fuchsia-800">
           <span className="text-emerald-950">Pad Bank: </span>
-          <BankSelect soundBank={padSounds} setSound={setPad} soundName={pad.name}/>
+          <BankSelect key={"bankSelectPad"} soundBank={padSounds} setSound={setPad} soundName={pad.name}/>
         </div>
       </div>
     </div>

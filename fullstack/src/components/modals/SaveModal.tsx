@@ -24,6 +24,7 @@ const SaveModal = ({ soundbankName, stepsRef, prog, padSound }) => {
   if (prog) {
     prog.forEach((el, i) => {
       // if(!el)
+      console.log('el : ', el)
       if (el === null) curatedprog.push('');
       else curatedprog.push(el.join('.'))
     })

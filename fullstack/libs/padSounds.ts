@@ -9,8 +9,6 @@ class bankBuilder {
 
 }
 
-
-
 const base = '/audio';
 
 const dream = new bankBuilder('Dream', base + '/pad-dream.mp3')
@@ -30,3 +28,6 @@ const soundBank = [
 // console.log(soundBank)
 
 module.exports = soundBank;
+
+//!changed
+export default { soundBank, bankBuilder };

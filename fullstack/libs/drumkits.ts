@@ -1,5 +1,13 @@
+//!changed
+type Sound = {
+  url: String,
+  name: string
+}
+
 class KitBuilder {
-  constructor(name, sounds) {
+  name: string;
+  sounds: Sound[];
+  constructor(name: string, sounds: Sound[]) {
     this.name = name,
     this.sounds = sounds
   }
@@ -46,3 +54,6 @@ const kitAcoustic = new KitBuilder('Acoustic Kit', [
 const drumKits = [kitEOE, kitAcoustic]
 
 module.exports = drumKits;
+//! changed
+//export default {kitEOE, kitAcoustic};
+

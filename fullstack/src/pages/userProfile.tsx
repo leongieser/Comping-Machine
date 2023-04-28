@@ -56,7 +56,7 @@ const userProfile = () => {
           <h4 className="text-xl text-fuchsia-600 mb-2">Your Sessions:</h4>
           <ul className="list-style-dot px-5 ">
             {userTracks && userTracks.map(track => {
-              return <li className=" 
+              return <li key={track} className="
               text-sky-200 opacity-90 px-2 py-1 list-[square] ml-10 hover:text-fuchsia-500">
                 <div>
                   <a href={`/session/${track.id}`}><h4>{track.name}</h4></a>

@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 import ChordSelector from "./ChordSelector";
-import useChord from "../../../../Hooks/useChord";
+import {useChord, useBearStore, useChordStore }from "../../../../Hooks/useChord";
 import { Chord, Note } from "tonal";
-import { Tchord } from 'bring/ts/types';
 
-const ChordSeq = ({ setProg, savedChords }) => {
+
+  const ChordSeq = ({ setProg, savedChords }) => {
   //TODO investigate bars
   const [bars, setBars] = useState(1);
 
-  const [seq, setSeq] = useState([...Array(16).fill(1)]);
+  const [seq, setSeq] = useState([...Array(16).fill(null)]);
   let [step, setStep] = useState(null)
   const [showSelector, setShowSelector] = useState(false);
   const [chordNames, setChordNames] = useState([]);
-  const chord: Tchord = useChord();
+
+  const chord = useChordStore();
+
 
   useEffect(() => {
     console.log('saved Chord Prog', savedChords)
+// if(savedChords){
     if (savedChords?.length > 0) {
       let oldChords = [...Array(16).fill(null)];
       //TODO
@@ -34,21 +37,28 @@ const ChordSeq = ({ setProg, savedChords }) => {
     }
   }, [savedChords])
 
-  const handleBars = (e) => {
+  const handleBars = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log("sq", seq)
     let barsN = Number(e.target.value)
     setBars(barsN)
     setSeq([...Array(barsN * 16).fill(1)])
     setChordNames([...Array(barsN * 16).fill(null)]);
     setProg([...Array(barsN * 16).fill(null)])
+
+    console.log("seq after:" , seq)
   }
 
   // Shows or hides the chord selector
   const handleStepClick = (e) => {
+    console.log("step: ", e.target.id);
     setStep(e.target.id)
     showSelector ? setShowSelector(false) : setShowSelector(true);
   }
 
   function addChord() {
+
+
+
     if (chord.chordType && chord.rootNote) {
       const newChord = [chord.rootNote, chord.chordType]
       let prevSeq = seq;
@@ -63,6 +73,8 @@ const ChordSeq = ({ setProg, savedChords }) => {
       prevNames[step] = chordRoot + chordName;
       setChordNames([...prevNames]);
     }
+
+
   }
 
   function removeChord(e) {
@@ -101,16 +113,16 @@ const ChordSeq = ({ setProg, savedChords }) => {
             return (
 
                 <div key={"seq"+i} className="relative">
-                  <div id={i.toString()}
+                  <div key={"stepEl"+i} id={i.toString()}
                     onClick={(e) => handleStepClick(e)}
                     className="inline hover:opacity-100 hover:bg-fuchsia-500 opacity-80 rounded min-w-[50px] h-fit text-white bg-fuchsia-600
                     flex flex-col">
                     {i + 1}
                   </div>
-                  <div className="">
+                  <div key={"buttonContainer"+i} className="">
                     <button className={`opacity-70 hover:opacity-100 absolute -top-3 -right-2
                     ${chordNames[i] ? 'visible' : 'invisible'}`}
-                      id={i.toString()} onClick={(e) => removeChord(e)}>⛔</button>
+                      key={"removeCord"+i} id={i.toString()} onClick={(e) => removeChord(e)}>⛔</button>
                   </div>
                 </div>
               )
