@@ -1,9 +1,12 @@
 import { useSession } from 'next-auth/react'
 
-function CMApp() {
+export default function InstrumentLayout() {
   const {data} = useSession()
   console.log("data from app", data);
   // TODO fetch user sessions?
+
+  //
+
 
   return (
     // <PadSequencer/>
@@ -11,6 +14,7 @@ function CMApp() {
     <div className="flex flex-col justify-center items-center bg-slate-700 w-full h-full">
       <div className='flex flex-row'>
     <section id="pad-sequencer"className="h-60 w-96" ></section>
+    {/* <DrumMachine> */}
     <section id="instrument-selection" className="h-60 w-96"></section>
       </div>
       <div className='flex flex-row'>
@@ -22,4 +26,3 @@ function CMApp() {
   )
 }
 
-export default CMApp

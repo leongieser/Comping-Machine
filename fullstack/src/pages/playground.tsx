@@ -1,9 +1,12 @@
 import { useSession } from 'next-auth/react'
 import Layout from 'bring/components/layout/MainLayout';
 import Navbar from 'bring/components/layout/NavBar';
-import CMApp from 'bring/components/App';
+import { use } from 'react';
+import InstrumentLayout from 'bring/components/layout/InstrumentLayout';
 
-export default function CompingMachine() {
+
+//TODO appropriate name for container
+export default function playgroundPage() {
 
   const session = useSession()
   const {data} = session
@@ -11,11 +14,12 @@ export default function CompingMachine() {
 
   // if(!data) router.push("/")
 
+  // useEffect fetch all the settings for cmapp and pass them to zustand store
 
   return (
     <Layout>
       <Navbar/>
-      <CMApp/>
+      <InstrumentLayout/>
     </Layout>
   )
 }
