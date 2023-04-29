@@ -1,37 +1,16 @@
+import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router';
-import Layout from "../components/layout"
-import { signIn, useSession } from 'next-auth/react'
-export default function IndexPage() {
+import LandingPage from 'bring/components/LandingPage';
+
+export default function Index() {
   const router = useRouter()
-  // const { data: session } = useSession()
+  const session = useSession()
+  const { data } = session
 
-  //TODO signIn vs router.push("")
-  //!what?
-  // const handleGetStarted = async (e:React.MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault()
-  //   const res = await signIn()
-  //   if {res.error} {
-  //      return <div>Please try again</div>
-  //  } else {
-  //   router.push('/me')
-  // }
+  console.log("indexPage", {data});
 
+  if(data) router.push('/cm')
 
-
-
-  return (
-    // <Layout>
-    //   <button onClick={() => signIn()}>Login</button>
-    // </Layout>
-<>
-
-
-
-         <div className=''>
-          <h1 className='mb-12'>Comping machineeeeee motherfucker send it</h1>
-          <button className="w-52" onClick={() => signIn()}>Get started</button>
-        </div>
-
-</>
-  )
+  return <LandingPage />
 }
+

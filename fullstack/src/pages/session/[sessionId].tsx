@@ -28,6 +28,7 @@ const SessionDetail = () => {
           id: sessionId
         }
       })
+
       console.log('current session', current);
       setCurrentSession({ ...current.data });
 

@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
+import { useRouter } from "next/router";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -8,17 +9,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const session = await getServerSession(req, res, authOptions);
+  const router = useRouter();
 
-  console.log(data);
+  if (!session) router.push("/");
 
-  if (session) {
-    return res.send({
-      content:
-        "This is protected content. You can access this content because you are signed in.",
-    });
-  }
-
-  res.send({
-    error: "You must be signed in to view the protected content on this page.",
-  });
+  res.send(JSON.stringify(session, null, 2));
 }
+//

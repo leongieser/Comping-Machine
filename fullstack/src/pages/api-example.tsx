@@ -1,4 +1,4 @@
-import Layout from "../components/layout"
+import Layout from "../components/layout/MainLayout"
 
 export default function ApiExamplePage() {
   return (

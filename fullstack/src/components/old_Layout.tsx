@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import Navbar from "./layout/Navbar";
+import Navbar from "./layout/old_Navbar";
 import { useEffect } from "react";
 
 const Layout = ({ children }) => {

@@ -1,73 +1,32 @@
-//icons setup
-import { config } from '@fortawesome/fontawesome-svg-core'
-import '@fortawesome/fontawesome-svg-core/styles.css'
-import { faKeyboard, faUser, faStopCircle } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-config.autoAddCss = false
+import Link from 'next/link';
+import { signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import useUser from '../../../Hooks/useUser';
+import Image from 'next/image'
 
-import { useEffect, useState } from 'react'
-// import useLoginModal from '../../../Hooks/useLoginModal'
-import { useSession, signIn, signOut } from 'next-auth/react';
-import { useRouter } from "next/router";
-import { faMusic, faRepeat } from '@fortawesome/free-solid-svg-icons'
+function Navbar() {
+  const { user, loading } = useUser()
 
-const Navbar = () => {
-  const { data: session } = useSession();
-  let [profileDisplay, setProfileDisplay] = useState('hidden')
-  const router = useRouter()
-
-  useEffect(() => {
-    if (session) {
-      setProfileDisplay('visible text-fuchsia-900');
-    }
-  }, [session])
+  console.log({user});
 
   return (
-    <div className='container lg:max-w-[1000px] flex flex-col justify-center items-center lg:justify-center md:justify-center min-w-[400px]
-    mx-auto h-fit w-full  p-2 rounded-b-lg
-    shadow-lg shadow-fuchsia-900 
-    ' >
-
-      {/* <NavbarHeader /> */}
-      <div className='w-min-[100px]'>
-        <a href={session ? '/userHome' : '/'}>
-          <FontAwesomeIcon className=' text-fuchsia-100 ring ring-pink-500 ring-offset-1 opacity-70 hover:opacity-100' style={iconStyle} icon={faKeyboard} />
-        </a>
-        <button className={profileDisplay}>
-          <FontAwesomeIcon onClick={() => { router.push('/userProfile') }} className=' text-fuchsia-800 opacity-70 hover:opacity-100' style={iconStyle} icon={faMusic} />
-        </button>
-
-        {!session ?
-          <FontAwesomeIcon onClick={() => router.push('/login')} className=' text-fuchsia-100 ring ring-pink-500 ring-offset-1 opacity-70 hover:opacity-100' style={iconStyle} icon={faUser} />
-          : <>
-            <div className='inline'>
-              <FontAwesomeIcon onClick={() => signOut({ callbackUrl: '/' })} className=' text-fuchsia-100 ring ring-pink-500 ring-offset-1 opacity-70 hover:opacity-100' style={iconStyle} icon={faStopCircle} />
-            </div>
-          </>
-        }
+    <nav className="bg-red-200 flex flex-row justify-end">
+      <div className="p-0 mr-2">
+        <ul className='flex flex-row'>
+          <li className='flex items-center mr-2'><Link className="flex items-center p-3 border border-slate-700 rounded-2xl h-8" href={"/profile"}>Profile</Link></li>
+          <li className='flex items-center mr-2'>
+            <button className="flex items-center p-3 border border-slate-700 rounded-2xl h-8" onClick={() => signOut({ callbackUrl: '/' })}>
+              Log Out
+            </button>
+          </li>
+          <li className='flex items-center p-2 '>
+            {/*TODO apply loading state to image */ }
+            <Image className="rounded-full" src={user?.image} width={48} height={48} alt="user avatar"></Image>
+          </li>
+        </ul>
       </div>
-      {session ? <div className={profileDisplay}><span className='text-fuchsia-200'>C O M P I N G - M A C H I N E </span>| Logged as {session.user.name}</div>
-        : <span className='text-fuchsia-200'>C O M P I N G - M A C H I N E </span>
-      }
-    </div>
+    </nav>
   )
 }
 
-const iconStyle = {
-
-  height: '30px',
-  width: '30px',
-  margin: '2px 10px',
-  backgroundColor: 'inherit',
-  borderRadius: '50%',
-  padding: '2px',
-  cursor: 'pointer',
-}
-
-const bgImage = {
-  backgroundImage: 'url(/CM-logo.png)',
-  backgroundSize: 'auto 100%',
-  backgroundRepeat: 'no-repeat'
-}
-
-export default Navbar;
+export default Navbar
