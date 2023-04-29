@@ -7,6 +7,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <>
       {/* <Header /> */}
       <main >{children}</main>
+
       {/* <main className='flex items-center justify-center'>{children}</main> */}
     </>
   )
