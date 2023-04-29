@@ -10,10 +10,10 @@ import { Chord, transpose, note } from 'tonal';
 //Drumm machine, Mapped key for every sample:
 const KEY = "C4";
 
-const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) => {
+const Master = ({ drumSamples, chordProg, padSound, numOfSteps = 16, drumTracks }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const saveModal = useSaveModal();
-  let [showBPM, setShowBPM] = useState(120)
+  // const saveModal = useSaveModal();
+  let [BPM, setBPM] = useState(120) //rengame to just bpm
   const session = useSession();
 
   // References
@@ -23,25 +23,32 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
   const lightRef = useRef([]);
   const isMuted = useState([])
 
-  useEffect(() => {
-    // console.log('session before : ', session)
-    if (session.data) {
-      localStorage.setItem('user', JSON.stringify(session.data))
-    } else if (localStorage.getItem('user')) {
-      session.data = JSON.parse(localStorage.getItem('user'))
-    }
-    // console.log('session : ', session)
-  }, [])
+
+
+
+
+
+  // useEffect(() => {
+  //   // console.log('session before : ', session)
+  //   if (session.data) {
+  //     localStorage.setItem('user', JSON.stringify(session.data))
+  //   } else if (localStorage.getItem('user')) {
+  //     session.data = JSON.parse(localStorage.getItem('user'))
+  //   }
+  //   // console.log('session : ', session)
+  // }, [])
 
 
 
   // For the drums:
-  const trackIds = [...Array(samples?.sounds?.length).keys()];
-  const stepIds = [...Array(16).keys()];
+  const trackIds = [...Array(drumSamples?.sounds?.length).keys()]; // this fills trackId with 0-15
+  const stepIds = [...Array(16).keys()]; // fills stepIds with 0-15
 
+  //!########################################################## cord start
 
   // Chords are played using Tone.js and Howl libraries
   let count = -1; //16ths count, used to play the chords.
+  //!wtf
   let nextChordRoot;
   let nextChord;
 
@@ -56,8 +63,10 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
       console.log('Error loading Howler audio: ')
     }
   })
+
+
   const howlerSampler = {
-    getSamples() {
+    getSamples: () => {
       const noteLength = 2400; //The audio is made so that each note lasts 2400ms
       let timeMark = 0;
       // Map each note to its corresponding MIDI key starting from C1(24) and finishing with C7(96)
@@ -78,19 +87,28 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
     }
   }
 
+
+  //!########################################################## cord stop
   // if (typeof AudioBuffer !== 'undefined') // Use this if things go wrong with the buffer
 
+
+  //TODO on stop let the beatmachine finish the current loop and then stop
+  // if (!isPlaying) {
+  // current position
+  // Tone.Transport.position = 0; // would reset 1 16 to 0
+
   const handlePlay = async () => {
-    if (Tone.Transport.state === 'started') {
+    if (Tone.Transport.state === 'started') { // could this be isPlaying?
       // if (count ===  0) // I would love to find a way to do this, wait for the first beat and stop right before
       Tone.Transport.stop();
       setIsPlaying(false);
       count = -1;
-
+      return
     } else {
       await Tone.start();
       // Give it a bit of time so that the first sound plays
       setTimeout(() => {
+        // Tone.Transport.start(0 , 200);
         Tone.Transport.start();
       }, 200)
       setIsPlaying(true);
@@ -99,8 +117,10 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
 
   const handleTempoChange = (e) => {
     // console.log(e.target.value)
+    //TODO set setBMP to e.target.vlaue
+
     Tone.Transport.bpm.value = Number(e.target.value);
-    setShowBPM(Math.floor(Number(e.target.value)))
+    setBPM(Math.floor(Number(e.target.value)))
   }
 
   const handleVolumeChange = (e) => {
@@ -113,21 +133,32 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
   }
 
 
-  useEffect(() => {
+  //!came from top of use effect
+
+     /* {
     // console.log('saved chordprog: ', chordProg)
     // console.log('saved pad sound: ', padSound)
     // console.log('saved drum tracks: ', drumTracks)
 
-    if (session) {
-      localStorage.setItem("session", JSON.stringify(session));
-    } else {
-      localStorage.removeItem("session");
-    }
+    // if (session) {
+    //   localStorage.setItem("session", JSON.stringify(session));
+    // } else {
+    //   localStorage.removeItem("session");
+    // }
 
 
     // For every sample create an id(number), sample the sound to an individual sampler using the same KEY for every sound
     // and connect it to the output. Then save all those samplers to the tracksRef array
-    tracksRef.current = samples?.sounds?.map((sample, i) => ({
+    }
+    */
+
+
+
+
+  useEffect(() => {
+
+
+    tracksRef.current = drumSamples.sounds?.map((sample, i) => ({
       id: i,
       sampler: new Tone.Sampler({
         urls: {
@@ -168,7 +199,7 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
       seqRef.current?.dispose();
       tracksRef.current?.map(tr => tr.sampler.dispose());
     }
-  }, [samples?.sounds, numOfSteps, isPlaying, chordProg, session])
+  }, [drumSamples?.sounds, numOfSteps, isPlaying, chordProg, session])
 
   const muteTrack = (e) => {
     // If is muted...
@@ -205,8 +236,10 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
   }
 
   return (
+
     <div>
-      <SaveModal soundbankName={samples?.name} stepsRef={stepsRef.current} prog={chordProg} padSound={padSound.url} ></SaveModal>
+      {/* save session text button */}
+      <SaveModal soundbankName={drumSamples?.name} stepsRef={stepsRef.current} prog={chordProg} padSound={padSound.url} ></SaveModal>
       <div className="relative w-full flex flex-col ">
         <div className='flex items-center'>
           <h1 className="text-fuchsia-500 text-xl">Master Sequencer</h1>
@@ -216,6 +249,10 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
             : <a href='/login' className='text-sky-700 hover:text-sky-500 ml-5 hover:underline decoration-sky-500/[.80]'>🖭 Log in to save future Sessions!</a>
           }
         </div>
+
+
+
+          {/* current beat dot */}
         <div className='mt-8 flex justify-around'>
 
           <button onClick={handlePlay}
@@ -228,8 +265,12 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
                       `}>
             {isPlaying ? 'Stop' : 'Play'}
           </button>
+
+
+
+
           <label className='relative text-fuchsia-500 text-xl' >
-            <div className='min-w-[600px] absolute -top-6 opacity-80 '>BPM: {showBPM} </div>
+            <div className='min-w-[600px] absolute -top-6 opacity-80 '>BPM: {BPM} </div>
             <input className='w-[200px]'
               type='range' min={40} max={300} step={0.01} onChange={(e) => handleTempoChange(e)} defaultValue={120} />
           </label>
@@ -245,6 +286,12 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
           </label>
         </div>
 
+
+
+
+
+
+
         <div className='flex justify-around'>
           <div>
             <div className='my-5'>
@@ -252,14 +299,18 @@ const Master = ({ samples, chordProg, padSound, numOfSteps = 16, drumTracks }) =
                 trackIds.map((trackId, i) => (
 
                   <div key={trackId} className='flex my-2 items-center'>
+
+
+                   //! trigger the sample to hear a preview
+
                     <button
                     //!changed by leonor
                       id={trackId.toString()}
                       onClick={(e) => { muteTrack(e), { passive: true } }} // passive true... Very nice feature!
                       className="text-emerald-100 text-sm flex flex-col justify-center items-center
                         w-[100px] ring ring-1  p-1 mx-3 rounded shadow-lg ring-emerald-400 shadow-emerald-500/50 hover:bg-emerald-300 hover:text-white"
-                    >{(samples?.sounds && samples?.sounds.length) ?
-                      samples?.sounds[trackId].name
+                    >{(drumSamples?.sounds && drumSamples?.sounds.length) ?
+                      drumSamples?.sounds[trackId].name
                       :
                       'L O A D I N G'
                       }
