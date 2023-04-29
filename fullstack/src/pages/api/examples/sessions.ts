@@ -11,5 +11,5 @@ export default async function handler(
   const session = await getServerSession(req, res, authOptions);
   console.log("api hit: ", session);
 
-  res.send(JSON.stringify(session, null, 2));
+  res.send("Hello world!");
 }

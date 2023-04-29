@@ -5,7 +5,7 @@ import useUser from '../../../Hooks/useUser';
 import Image from 'next/image'
 
 function Navbar() {
-  const { user, loading } = useUser()
+  const { user } = useUser()
 
   console.log({user});
 
