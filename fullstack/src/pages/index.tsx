@@ -11,26 +11,6 @@ export default function Index() {
 
   if(data) router.push('/cm')
 
-<<<<<<< HEAD
   return <LandingPage />
-=======
-
-
-  return (
-    // <Layout>
-    //   <button onClick={() => signIn()}>Login</button>
-    // </Layout>
-<>
-
-
-
-         <div className=''>
-          <h1 className='mb-12'>Comping machineeeeee motherfucker send it</h1>
-          <button className="w-52" onClick={() => signIn()}>Get started NOW!!</button>
-        </div>
-
-</>
-  )
->>>>>>> aa24ea492b31b9ddd1ee0ee21ba2aaba8ef58079
 }
 
