@@ -29,7 +29,7 @@ export default function IndexPage() {
 
          <div className=''>
           <h1 className='mb-12'>Comping machineeeeee motherfucker send it</h1>
-          <button className="w-52" onClick={() => signIn()}>Get started</button>
+          <button className="w-52" onClick={() => signIn()}>Get started NOW!!</button>
         </div>
 
 </>
