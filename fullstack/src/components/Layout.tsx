@@ -6,8 +6,8 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       {/* <Header /> */}
-      <main className='flex items-center justify-center'>{children}</main>
-
+      <main >{children}</main>
+      {/* <main className='flex items-center justify-center'>{children}</main> */}
     </>
   )
 }

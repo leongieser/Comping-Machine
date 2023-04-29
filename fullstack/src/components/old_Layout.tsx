@@ -12,6 +12,7 @@ const Layout = ({ children }) => {
       localStorage.removeItem('session')
     }
   }, [session])
+
   return (
     <div className=" bg-black w-full">
       <div className="container  mx-auto xl:px-30 px-20">

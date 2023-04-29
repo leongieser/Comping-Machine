@@ -1,15 +1,24 @@
 import { getServerSession } from "next-auth/next";
-import { GetServerSidePropsResult, NextApiResponse } from "next";
+import { authOptions } from "./auth/[...nextauth]";
 
-export async function handler(req, res) {
-  const session = await getServerSession(req, res);
+import type { NextApiRequest, NextApiResponse } from "next";
 
-  if (!session) {
-    res.status(401).json({ message: "You must be logged in." });
-    return;
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const session = await getServerSession(req, res, authOptions);
+
+  console.log(data);
+
+  if (session) {
+    return res.send({
+      content:
+        "This is protected content. You can access this content because you are signed in.",
+    });
   }
 
-  return res.json({
-    message: "Success",
+  res.send({
+    error: "You must be signed in to view the protected content on this page.",
   });
 }

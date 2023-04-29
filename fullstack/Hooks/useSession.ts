@@ -1,6 +1,6 @@
 import { create } from "zustand";
 // zustand, light weight library for global state management, simpler than redux... yes
-
+//!THIS NEEDS TO GO
 // Creation of the store:
 const useSession = create((set) => ({
   chordType: "",

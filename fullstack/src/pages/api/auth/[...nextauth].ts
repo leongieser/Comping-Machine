@@ -1,6 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
+import { redirect } from "next/dist/server/api-utils";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -13,6 +14,13 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    async redirect({ url }) {
+      if (url.includes("login")) return "/me";
+      if (!url.includes("login")) return "/";
+      return url;
+    },
+  },
 };
 
 export default NextAuth(authOptions);
