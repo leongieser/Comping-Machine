@@ -120,6 +120,7 @@ const Master = ({ drumSamples, chordProg, padSound, numOfSteps = 16, drumTracks 
     //TODO set setBMP to e.target.vlaue
 
     Tone.Transport.bpm.value = Number(e.target.value);
+    //set step on slider to 1
     setBPM(Math.floor(Number(e.target.value)))
   }
 
@@ -158,7 +159,9 @@ const Master = ({ drumSamples, chordProg, padSound, numOfSteps = 16, drumTracks 
   useEffect(() => {
 
 
+
     tracksRef.current = drumSamples.sounds?.map((sample, i) => ({
+
       id: i,
       sampler: new Tone.Sampler({
         urls: {
@@ -166,6 +169,7 @@ const Master = ({ drumSamples, chordProg, padSound, numOfSteps = 16, drumTracks 
         }
       }).toDestination()
     }));
+    /////////////////////////////////////////////
 
     // This function creates the sequence of each drum track
     seqRef.current = new Tone.Sequence((time, step) => {
@@ -185,9 +189,7 @@ const Master = ({ drumSamples, chordProg, padSound, numOfSteps = 16, drumTracks 
         nextChord = Chord.get(chordProg[count][1]);
         howlerSampler.playChord();
       }
-    },
-      [...stepIds],
-      "16n"
+    },[...stepIds], "16n"
     );
 
     isMuted.current = Array(16).fill(false);
@@ -200,6 +202,17 @@ const Master = ({ drumSamples, chordProg, padSound, numOfSteps = 16, drumTracks 
       tracksRef.current?.map(tr => tr.sampler.dispose());
     }
   }, [drumSamples?.sounds, numOfSteps, isPlaying, chordProg, session])
+
+
+
+
+
+
+
+
+
+
+
 
   const muteTrack = (e) => {
     // If is muted...
