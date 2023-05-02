@@ -21,7 +21,7 @@ function Navbar() {
           </li>
           <li className='flex items-center p-2 '>
             {/*TODO apply loading state to image */ }
-            <Image className="rounded-full" src={user?.image} width={48} height={48} alt="user avatar"></Image>
+            {/* <Image className="rounded-full" src={user?.image} width={48} height={48} alt="user avatar"></Image> */}
           </li>
         </ul>
       </div>

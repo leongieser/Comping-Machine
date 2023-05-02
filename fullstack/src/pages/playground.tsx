@@ -6,27 +6,21 @@ import InstrumentLayout from 'bring/components/layout/InstrumentLayout';
 import SampleSequencer from 'bring/components/drumSequencer/SampleSequencer';
 import * as Tone from 'tone';
 import { useMasterControlStore, type TmasterControlStore } from 'bring/components/drumSequencer/masterControlStore';
+import SeqTest from 'bring/components/drumSequencer/SeqTest';
 import PadChordMachine from 'bring/components/padMachine';
 
 //TODO appropriate name for container
 export default function playgroundPage() {
-  const {toggleaudioContextLoaded} = useMasterControlStore() as TmasterControlStore
+
   const session = useSession()
   const {data} = session
   console.log("playground page: ", data);
 
-  // useEffect(() => {
-  //   const enableAudioContext = async () => {
-  //     await Tone.start()
-  //     toggleaudioContextLoaded()
-  //   };
 
-  //   enableAudioContext()
-
-  //   return () => {}
-  // }, [])
-
-
+const samples = [
+  { "url": "/audio/kit-808/kick.mp3", "name": "Kick" },
+  { "url": "/audio/kit-808/rimshot.mp3", "name": "Rim Shot" }
+]
 
 
   // if(!data) router.push("/")
@@ -39,6 +33,13 @@ export default function playgroundPage() {
       {/* <InstrumentLayout/> */}
       <PadChordMachine/>
       {/* <SampleSequencer/> */}
+      {/* <SampleSequencer/> */}
+      <SeqTest samples={
+        [
+          { "url": "/audio/kit-808/kick.mp3", "name": "Kick" },
+          { "url": "/audio/kit-808/rimshot.mp3", "name": "Rim Shot" }
+          ]
+      }/>
     </Layout>
   )
 }
