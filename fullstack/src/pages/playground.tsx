@@ -34,12 +34,12 @@ const samples = [
       <PadChordMachine/>
       {/* <SampleSequencer/> */}
       {/* <SampleSequencer/> */}
-      <SeqTest samples={
+      {/* <SeqTest samples={
         [
           { "url": "/audio/kit-808/kick.mp3", "name": "Kick" },
           { "url": "/audio/kit-808/rimshot.mp3", "name": "Rim Shot" }
           ]
-      }/>
+      }/> */}
     </Layout>
   )
 }

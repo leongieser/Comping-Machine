@@ -4,35 +4,23 @@ import {useChordStore} from '../../../../Hooks/useChord';
 import { useChordsSavedStore } from '../../../../Hooks/useChordProg';
 
 const ChordSelector = ({ setShowSelector, addChord}) => {
-  const [selectedType, setSelectedType] = useState('');
-  const [selectedRoot, setSelectedRoot] = useState('');
-  const [selectedOctave, setSelectedOctave] = useState('');
-  const chord = useChordStore()
-
-  // https://freshman.tech/snippets/typescript/fix-value-not-exist-eventtarget/
+  const [selectedOctave, setSelectedOctave] = useState('2');
+  const [selectedRoot, setSelectedRoot] = useState('C');
+  const [selectedType, setSelectedType] = useState(commonChords[0]);
 
   const rootSelect = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'E#', 'Fb', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B', 'B#', 'Cb'];
 
-  // const buildChord = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   console.log('TYPE VALUE: ', e.target.value);
-  //   setSelectedType(e.target.value);
-
-
-  // }
-
   const handleSubmit = (e: React.FormEvent) => {
+
     e.preventDefault();
-    console.log('OCTAVE BITCH: ',selectedOctave)
     let rNote = selectedRoot + selectedOctave;
     let type = selectedType;
     useChordStore.getState().updateRoot(rNote);
     useChordStore.getState().updateType(type);
     const chordAdd = useChordStore.getState();
-    console.log(chordAdd);
-    //! possibly not needed for now but maybe for saving session
     useChordsSavedStore.getState().addChord(chordAdd);
     setShowSelector(false);
-    addChord();
+    addChord(chordAdd);
 
   }
 
@@ -61,7 +49,7 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
             onChange={(e) => setSelectedRoot(e.target.value)}
             name='root' id='note-root'
             className='text-fuchsia-950 rounded-lg mx-2'>
-            {<option>{rootSelect[0]}</option>}
+            {<option selected>{rootSelect[0]}</option>}
             {rootSelect.slice(1).map(root => <option key={root}>{root}</option>)}
 
           </select>
@@ -72,7 +60,7 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
             name='type' id='chord-type'
             className='text-fuchsia-950 rounded-lg mx-2'>
             <optgroup label="Everyday Chords: ">
-            {<option>{commonChords[0]}</option>}
+            {<option selected >{commonChords[0]}</option>}
             {commonChords.slice(1).map(type => <option key={type}>{type}</option>)}
             </optgroup>
             <optgroup label="Altered Dominant Chords: ">

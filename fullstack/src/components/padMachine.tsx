@@ -7,6 +7,7 @@ import { useMasterControlStore, type TmasterControlStore } from './drumSequencer
 import { useChordStore } from "../../Hooks/useChord";
 import { Howl } from 'howler';
 import { Chord, transpose, note } from 'tonal';
+import { TChord } from "bring/ts/types";
 
 
 const PadChordMachine = () => {
@@ -47,28 +48,6 @@ const PadChordMachine = () => {
     updateSelectedPad(selectedPadObj);
   }
 
-  function addChord() {
-
-    if (chord.chordType && chord.rootNote) {
-      console.log(chord.rootNote)
-      const newChord = [chord.rootNote, chord.chordType]
-      let prevSeq = seq;
-      prevSeq[step] = newChord;
-      setSeq([...prevSeq]);
-      setChordProg([...prevSeq]);
-      // console.log(newChord, 'step: ', step);
-
-      let chordRoot = chord.rootNote.slice(0, chord.rootNote.length - 1);
-      let chordName = Chord.get(`${chord.rootNote}${chord.chordType}`).aliases[0];
-      let prevNames = chordNames;
-      prevNames[step] = chordRoot + chordName;
-      setChordNames([...prevNames]);
-      console.log(chordNames);
-    }
-
-  }
-
-
   let chordSounds = new Howl({
     src: [selectedPad.url], // This will be dynamic also
     onload() {
@@ -79,7 +58,6 @@ const PadChordMachine = () => {
       console.log('Error loading Howler audio: ')
     }
   })
-
 
   const howlerSampler = {
     getSamples: () => {
@@ -132,6 +110,29 @@ const PadChordMachine = () => {
     }
   }, [isPlaying, chordNames]);
 
+  function addChord(chord: TChord) {
+
+    if (chord.chordType && chord.rootNote) {
+
+      const newChord = [chord.rootNote, chord.chordType]
+      let prevSeq = seq;
+      prevSeq[step] = newChord;
+      setSeq([...prevSeq]);
+      setChordProg([...prevSeq]);
+
+      let chordRoot = chord.rootNote.slice(0, chord.rootNote.length - 1);
+      let chordName = Chord.get(`${chord.rootNote}${chord.chordType}`).aliases[0];
+      let prevNames = chordNames;
+      prevNames[step] = chordRoot + chordName;
+      setChordNames([...prevNames]);
+
+    }
+
+  }
+
+  function removeChord(e: React.MouseEvent<HTMLButtonElement>) {
+    console.log(e.currentTarget.id);
+  }
 
   return (
     <>
@@ -159,9 +160,15 @@ const PadChordMachine = () => {
                     flex flex-col">
                     {i + 1}
                   </div>
+                  <div key={"buttonContainer"+i} className="">
+                    <button className={`opacity-70 hover:opacity-100 absolute -top-3 -right-2
+                    ${chordNames[i] ? 'visible' : 'invisible'}`}
+                      key={"removeCord"+i} id={i.toString()} onClick={(e) => removeChord(e)}>⛔</button>
+                  </div>
                 </div>
               )
             })}
+
             {showSelector &&
               <div className={`w-full absolute top-11 z-10 p-3`}>
                 <ChordSelector setShowSelector={setShowSelector} addChord={addChord}/>
