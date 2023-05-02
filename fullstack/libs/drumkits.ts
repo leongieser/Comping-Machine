@@ -36,10 +36,6 @@ const sounds = [
     howl: new Howl({ src: ["/audio/kit-808/kick.mp3"] }),
   },
 ];
-// 'nerd'
-
-// (╯°□°）╯︵ ┻━┻ <-- next commit message
-// copilot knows whats up
 
 const kitEOE = new KitBuilder("808 Kit", [
   { url: "/audio/kit-808/kick.mp3", name: "Kick" },

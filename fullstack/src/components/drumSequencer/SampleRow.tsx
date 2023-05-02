@@ -1,15 +1,12 @@
-import { useState, useEffect } from 'react';
 import { useSequencerStore, type TSequencerStore } from './sequencerStore';
 
-const SampleRow = ({ sound, soundIndex, kitName }) => {
-  const { updatePatternStep, currentPatterns } = useSequencerStore() as TSequencerStore;
-  const [pattern, setPattern] = useState(currentPatterns[soundIndex]);
+const SampleRow = ({ sound, soundIndex }) => {
+  const { updatePatternStep } = useSequencerStore() as TSequencerStore;
 
-  useEffect(() => {
-    setPattern(currentPatterns[soundIndex]);
-  }, [currentPatterns, soundIndex]);
 
-  const toggleStep = (stepIndex) => {
+
+
+  const toggleStep = (stepIndex: number) => {
     updatePatternStep(soundIndex, stepIndex, !pattern[stepIndex]);
   };
 
