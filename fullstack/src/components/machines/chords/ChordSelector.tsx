@@ -1,7 +1,7 @@
-// const chordTypes = require('../../../../libs/chordTypes');
 import { commonChords, altDomChords, moreChords} from '../../../../libs/chordTypes';
 import { useState, useEffect } from 'react';
 import {useChordStore} from '../../../../Hooks/useChord';
+import { useChordsSavedStore } from '../../../../Hooks/useChordProg';
 
 const ChordSelector = ({ setShowSelector, addChord}) => {
   const [selectedType, setSelectedType] = useState('');
@@ -13,18 +13,27 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
 
   const rootSelect = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'E#', 'Fb', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B', 'B#', 'Cb'];
 
-  const buildChord = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(e.target.value);
-    let rNote = selectedRoot + selectedOctave;
-    let type = e.target.value;
-    chord.updateRoot(rNote);
-    chord.updateType(type);
-  }
+  // const buildChord = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   console.log('TYPE VALUE: ', e.target.value);
+  //   setSelectedType(e.target.value);
+
+
+  // }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('OCTAVE BITCH: ',selectedOctave)
+    let rNote = selectedRoot + selectedOctave;
+    let type = selectedType;
+    useChordStore.getState().updateRoot(rNote);
+    useChordStore.getState().updateType(type);
+    const chordAdd = useChordStore.getState();
+    console.log(chordAdd);
+    //! possibly not needed for now but maybe for saving session
+    useChordsSavedStore.getState().addChord(chordAdd);
     setShowSelector(false);
     addChord();
+
   }
 
   return (
@@ -39,11 +48,12 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
         <label>Octave:
           <select required
             onChange={(e) => setSelectedOctave(e.target.value)}
+            value="2"
             name='octave' id='octave-root'
             className='text-fuchsia-950 rounded-lg mx-2'>
             {/* <option selected hidden disabled value="--none--"></option> */}
-            <option selected value="2">2</option>
-            <option>3</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
           </select>
         </label>
         <label>Root:
@@ -58,7 +68,7 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
         </label>
         <label>Type:
           <select required
-            onChange={(e) => buildChord(e)}
+            onChange={(e) => setSelectedType(e.target.value)}
             name='type' id='chord-type'
             className='text-fuchsia-950 rounded-lg mx-2'>
             <optgroup label="Everyday Chords: ">

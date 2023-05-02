@@ -16,7 +16,7 @@ export type Session = {
 }
 
 export type TChord = {
-  chortType: string,
+  chordType: string,
   rootNote: string,
   updateType: (type: string) => void,
   updateRoot: (note: string) => void

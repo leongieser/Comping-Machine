@@ -1,11 +1,13 @@
-//TODO not happy
+import { Howl } from 'howler';
 
 class bankBuilder {
   name: string;
   url: string;
-
+  
   constructor(name: string, url: string) {
-    (this.name = name), (this.url = url);
+    this.name = name;
+    this.url = url;
+
   }
 }
 
@@ -24,7 +26,7 @@ const soundBank = [dream, pianoLong, pianoShort, pluck, softPad];
 
 // console.log(soundBank)
 
-module.exports = soundBank;
+//module.exports = soundBank;
 
 //!changed
-export default { soundBank, bankBuilder };
+export default soundBank;

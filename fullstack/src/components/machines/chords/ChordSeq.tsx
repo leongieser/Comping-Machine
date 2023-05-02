@@ -66,8 +66,6 @@ import { Chord, Note } from "tonal";
 
   function addChord() {
 
-
-
     if (chord.chordType && chord.rootNote) {
       const newChord = [chord.rootNote, chord.chordType]
       let prevSeq = seq;

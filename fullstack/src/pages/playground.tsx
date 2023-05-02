@@ -6,6 +6,7 @@ import InstrumentLayout from 'bring/components/layout/InstrumentLayout';
 import SampleSequencer from 'bring/components/drumSequencer/SampleSequencer';
 import * as Tone from 'tone';
 import { useMasterControlStore, type TmasterControlStore } from 'bring/components/drumSequencer/masterControlStore';
+import PadChordMachine from 'bring/components/padMachine';
 
 //TODO appropriate name for container
 export default function playgroundPage() {
@@ -36,7 +37,8 @@ export default function playgroundPage() {
     <Layout>
       <Navbar/>
       {/* <InstrumentLayout/> */}
-      <SampleSequencer/>
+      <PadChordMachine/>
+      {/* <SampleSequencer/> */}
     </Layout>
   )
 }
