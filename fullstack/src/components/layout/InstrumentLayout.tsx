@@ -77,7 +77,7 @@ const {isPlaying, togglePlaying, bpm, setBpm, globalVolume, setGlobalVolume} = u
 
 
     <section id="drum-sequencer" className="flex items-center justify-center col-start-2 col-end-3 row-start-4 row-end-6 bg-zinc-900" >
-    <SampleSequencer />
+    {/* <SampleSequencer /> */}
     </section>
     <section id="drumpad-selection" className="col-start-3 col-end-4 row-start-4 row-end-6 flex items-center justify-center bg-zinc-900">
       <div className='bg-teal-500 w-[500px] h-[500px]'></div>

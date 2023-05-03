@@ -25,14 +25,13 @@ function Navbar() {
           </li>
           <li className='flex items-center p-2'>
 
-            { loading ?
-             <Image className="rounded-full w-" src={user?.image} width={48} height={48} alt="user avatar"></Image>
-             :
-              <div className="animate-pulse">
-                <div className="rounded-full  bg-gray-200 h-12 w-12"></div>
-
-                </div>
-                }
+          { loading ?
+          <div className="animate-pulse">
+            <div className="rounded-full bg-gray-200 h-12 w-12"></div>
+          </div>
+          :
+          <Image className="rounded-full " src={user?.image} width={42} height={42} alt="user avatar"></Image>
+        }
 
           </li>
         </ul>
