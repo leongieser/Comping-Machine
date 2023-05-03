@@ -1,13 +1,14 @@
-import { usePadSeqStore } from "../../Hooks/usePadSeqStore"
-import soundBank from "../../libs/padSounds";
+import { usePadSeqStore } from "../../../Hooks/usePadSeqStore"
+import soundBank from "../../../libs/padSounds";
 import { useState, useEffect, useRef } from "react";
-import ChordSelector from "./machines/chords/ChordSelector";
+import ChordSelector from "../machines/chords/ChordSelector";
 import * as Tone from 'tone';
-import { useMasterControlStore, type TmasterControlStore } from './drumSequencer/masterControlStore';
-import { useChordStore } from "../../Hooks/useChord";
+import { useMasterControlStore, type TmasterControlStore } from '../drumSequencer/masterControlStore';
+import { useChordStore } from "../../../Hooks/useChord";
 import { Howl } from 'howler';
 import { Chord, transpose, note } from 'tonal';
 import { TChord } from "bring/ts/types";
+import PianoKeys from "./pianoKeys";
 
 
 const PadChordMachine = () => {
@@ -134,11 +135,14 @@ const PadChordMachine = () => {
     console.log(e.currentTarget.id);
   }
 
+  console.log(chordSounds);
+
   return (
     <>
-      <div className="bg-emerald-200 p-2 rounded shadow shadow-lg shadow-fuchsia-800">
-        <span className="text-emerald-950">Pad Bank: </span>
-        <select className="text-fuchsia-900 bg-fuchsia-100" onChange={handlePadChange}>
+    <section className="flex flex-row ml-10 mt-10 mr-10 p-4 bg-gray-400 rounded shadow shadow-lg shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)]">
+      <div className="bg-slate-200 p-2 rounded shadow shadow-lg shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] w-40 h-24">
+        <span className="text-emerald-950 ">Pad Bank: </span>
+        <select className="text-fuchsia-900 bg-fuchsia-100 w-18 rounded" onChange={handlePadChange}>
           {soundBank.map((pad) => (
               <option key={pad.name} value={pad.name}>
                 {pad.name}
@@ -146,18 +150,18 @@ const PadChordMachine = () => {
             ))}
         </select>
       </div>
-      <div className="flex ">
-          <span className="text-white text-md mr-2 w-[50px]">Steps: </span>
+      <div className="flex left-2 p-2 ml-10 rounded shadow shadow-lg shadow-gray-400 bg-violet-500/50 h-24">
+          <span className="text-white text-md mr-2 mt-5 w-[50px]">Steps: </span>
 
-          <div className="relative flex justify-between w-full">
+          <div className="relative flex justify-between w-full mt-5">
             {seq.map((_, i) => {
 
             return (
                 <div key={"seq"+i} className="relative">
                   <div key={"stepEl"+i} id={i.toString()}
                     onClick={(e) => handleStepClick(e)}
-                    className="inline hover:opacity-100 hover:bg-fuchsia-500 opacity-80 rounded min-w-[50px] h-fit text-white bg-fuchsia-600
-                    flex flex-col">
+                    className="inline shadow-[inset_0_-0.5px_4px_rgba(0,0,0,0.6)] hover:opacity-100 hover:bg-fuchsia-500 opacity-80 rounded min-w-[50px] h-fit ml-1.5 mr-1.5 text-center text-white bg-gray-500
+                    flex flex-col justify-between">
                     {i + 1}
                   </div>
                   <div key={"buttonContainer"+i} className="">
@@ -166,8 +170,10 @@ const PadChordMachine = () => {
                       key={"removeCord"+i} id={i.toString()} onClick={(e) => removeChord(e)}>⛔</button>
                   </div>
                 </div>
+
               )
             })}
+
 
             {showSelector &&
               <div className={`w-full absolute top-11 z-10 p-3`}>
@@ -176,7 +182,13 @@ const PadChordMachine = () => {
             }
           </div>
         </div>
+
+
+      <PianoKeys />
+
+    </section>
       <button disabled={false} onClick={() => togglePlaying()}>{isPlaying ? 'Stop' : 'Play'}</button>
+
     </>
   )
 }
