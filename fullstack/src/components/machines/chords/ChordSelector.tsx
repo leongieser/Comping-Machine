@@ -28,7 +28,7 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
     <div>
 
       <form className={
-        `text-fuchsia-500 bg-gray-900 rounded-lg
+        `text-zinc-100 bg-zinc-600 rounded-lg
          flex items-center justify-around p-2
       `}
         onSubmit={(e) => handleSubmit(e)}
@@ -71,7 +71,7 @@ const ChordSelector = ({ setShowSelector, addChord}) => {
             </optgroup>
           </select>
         </label>
-        <button type='submit'>Add Chord</button>
+        <button type='submit' className='bg-zinc-100 text-zinc-800 rounded p-2 w-32 bg-pink-400 hover:bg-pink-500'>Add Chord</button>
       </form>
 
     </div>

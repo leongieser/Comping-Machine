@@ -169,7 +169,7 @@ export default function PianoKeys() {
             H
           </button>
           <button
-            className="black-key bg-black text-white h-20 absolute left-[326px] w-[38px] rounded-br-lg rounded-bl-lg "
+            className="black-key bg-black text-white h-20 absolute left-[326px] w-[38px] rounded-br-lg rounded-bl-lg"
             onClick={() => playNoteByIndex(10)}
           >
             U
@@ -197,17 +197,15 @@ export default function PianoKeys() {
 
           <form className='justify-end'>
             <label >
-              Octave:
-              <select required
+
+              <input required
+                type="number"
                 onChange={(e) => handleOctaveChange(Number(e.target.value))}
-                value="2"
+                value={octave}
+                min={1}
+                max={4}
                 name='octave' id='octave-root'
-                className='text-fuchsia-950 rounded-lg mx-2'>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
+                className='text-fuchsia-950 rounded-lg mx-2'/>
               </label>
           </form>
 

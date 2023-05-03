@@ -159,8 +159,8 @@ const PadChordMachine = () => {
             ))}
         </select>
 
-      <div className="flex left-2 p-2 ml-10 rounded bg-gray-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 h-24 border border-zinc-400 items-center">
-          <span className="text-white text-md mr-2 items-center w-[50px]">Steps: </span>
+      <div className="flex left-2 p-2 ml-10 rounded bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 h-14 items-center">
+
 
           <div className="relative flex justify-between w-full">
             {seq.map((_, i) => {
@@ -170,7 +170,7 @@ const PadChordMachine = () => {
                   <div key={"stepEl"+i} id={i.toString()}
                     onClick={(e) => handleStepClick(e)}
                     className="shadow-[inset_0_-0.5px_4px_rgba(0,0,0,0.6)] hover:opacity-100 hover:bg-fuchsia-500 opacity-80 rounded min-w-[50px] ml-1.5 mr-1.5 text-center text-white bg-gray-500
-                     flex flex-col justify-between items-center">
+                     flex flex-col justify-between items-center select-none cursor-pointer">
                     {i + 1}
                   </div>
                   <div key={"buttonContainer"+i} className="">
