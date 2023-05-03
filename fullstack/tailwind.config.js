@@ -15,7 +15,7 @@ module.exports = {
         'custom': '1fr 3fr 2fr 1fr',
       },
       gridTemplateRows: {
-        'custom': '0.25fr 0.75fr 0.25fr repeat(2, 1fr) 0.25fr',
+        'custom': '0.1fr 0.55fr 0.25fr repeat(2, 1fr) 0.25fr',
       }
     },
   },

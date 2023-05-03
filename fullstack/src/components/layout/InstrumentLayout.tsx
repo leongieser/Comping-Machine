@@ -14,6 +14,7 @@ const {isPlaying, togglePlaying, bpm, setBpm, globalVolume, setGlobalVolume} = u
   return (
 
 
+    <div className='flex items-start'>
 
     <div className="grid grid-cols-custom grid-rows-custom gap-0 bg-slate-700 w-full h-100">
 
@@ -65,20 +66,21 @@ const {isPlaying, togglePlaying, bpm, setBpm, globalVolume, setGlobalVolume} = u
       <PianoKeys/>
     </section>
 
-    <section id="drum-sampler-selection" className="col-start-3 col-end-4 row-start-3 row-end-4">
+    <section id="drum-sampler-selection" className=" flex items-center justify-center col-start-3 col-end-4 row-start-3 row-end-4">
           <div>placeholder for some funky stuff</div>
     </section>
 
 
 
-    <section id="drum-sequencer" className="col-start-2 col-end-3 row-start-4 row-end-6" >
+    <section id="drum-sequencer" className="flex items-center justify-center col-start-2 col-end-3 row-start-4 row-end-6" >
     <SampleSequencer />
     </section>
-    <section id="drumpad-selection" className="col-start-3 col-end-4 row-start-4 row-end-6">
+    <section id="drumpad-selection" className="col-start-3 col-end-4 row-start-4 row-end-6 flex items-center justify-center">
       <div className='bg-teal-500 w-52 h-52'></div>
     </section>
 
     </div>
+          </div>
   )
 }
 

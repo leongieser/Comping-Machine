@@ -102,7 +102,7 @@ const SampleSequencer = ()  => {
 
 
   return (
-    <div className="flex justify-center items-center bg-slate-400 border-2">
+    <div className="flex justify-center items-center bg-zinc-900 border-2 w-2/3 p-5">
 
       {/* <div className="border p-1 ">
         <div className="h-6 font-normal text-sm">
@@ -122,7 +122,7 @@ const SampleSequencer = ()  => {
 
 
 
-        <div className='flex justify-between bg-black h-11'>
+        <div className='flex justify-between h-11'>
 
         <div className='flex justify-between items-center w-[145px]'>
               <select className="w-[100px] ml-3 rounded text-center" name="" id="">
