@@ -66,6 +66,7 @@ export default function PianoKeys() {
     const keyObj = pianoKeys.find(k => k.key === key);
     if (keyObj) {
       const note = keyObj.note + keyObj.octave.toString();
+      console.log(note);
       synth.triggerAttack(note, "8n");
       synth.triggerRelease("+1")
     }
@@ -75,7 +76,7 @@ export default function PianoKeys() {
     const keyObj = pianoKeys[index];
     if (keyObj) {
       const note = keyObj.note + keyObj.octave.toString();
-      synth.triggerAttack(note, "8n");
+      synth.triggerAttackRelease(note, "8n");
     }
   }
 
@@ -111,6 +112,7 @@ export default function PianoKeys() {
                 value="2"
                 name='octave' id='octave-root'
                 className='text-fuchsia-950 rounded-lg mx-2'>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>

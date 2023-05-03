@@ -14,12 +14,7 @@ import PianoKeys from "./pianoKeys";
 const PadChordMachine = () => {
 
   const { isPlaying, togglePlaying } = useMasterControlStore() as TmasterControlStore;
-
-
-
   const [ seq, setSeq ] = useState([...Array(16)].map(() => [...Array(2)].fill("")))
-  console.log(seq);
-
   const [ step, setStep ] = useState(null)
   const [chordProg, setChordProg ] = useState([]);
   const {selectedPad, updateSelectedPad, isMuted, updateIsMuted} = usePadSeqStore();
@@ -30,7 +25,7 @@ const PadChordMachine = () => {
 
   const [isAudioLoaded, setIsAudioLoaded] = useState(false);
 
-  let count = -1; //16ths count, used to play the chords.
+  let count = -1;
   let nextChordRoot;
   let nextChord;
 
@@ -83,7 +78,14 @@ const PadChordMachine = () => {
         })
       console.log(midiNotes)
       midiNotes.forEach(n => chordSounds.play(String(n)))
-      console.log('de we loop and play bitch');
+      console.log('looping');
+    },
+    stopChord() {
+      if (!isAudioLoaded) {
+        console.log('Audio not loaded yet.');
+        return;
+      }
+      chordSounds.stop();
     }
   }
 
@@ -100,7 +102,7 @@ const PadChordMachine = () => {
           howlerSampler.playChord();
         }
       }, steps, "16n");
-      seq.start(0);
+      seq.start();
       seqRef.current = seq;
     } else {
       //stop
@@ -109,7 +111,7 @@ const PadChordMachine = () => {
         seqRef.current = null;
       }
     }
-  }, [isPlaying, chordNames]);
+  }, [isPlaying, chordNames, chordProg, seq]);
 
   function addChord(chord: TChord) {
 
@@ -132,10 +134,17 @@ const PadChordMachine = () => {
   }
 
   function removeChord(e: React.MouseEvent<HTMLButtonElement>) {
-    console.log(e.currentTarget.id);
+    const cIdx = Number(e.currentTarget.id);
+    const prevSeq = seq;
+    prevSeq[cIdx] = ['', '']; // this should set the cord to his initial state (but not null)
+    setSeq([...prevSeq]);
+    const prevProg = chordProg;
+    prevProg[cIdx] = ['', ''];
+    setChordProg([...prevProg]);
+    const prevNames = chordNames;
+    prevNames[cIdx] = '';
+    setChordNames([...prevNames]);
   }
-
-  console.log(chordSounds);
 
   return (
     <>
