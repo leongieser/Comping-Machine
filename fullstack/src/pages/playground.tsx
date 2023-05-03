@@ -1,13 +1,14 @@
 import { useSession } from 'next-auth/react'
 import Layout from 'bring/components/layout/MainLayout';
-import Navbar from 'bring/components/layout/NavBar';
+
 import { useEffect } from 'react';
 import InstrumentLayout from 'bring/components/layout/InstrumentLayout';
 import SampleSequencer from 'bring/components/drumSequencer/SampleSequencer';
 import * as Tone from 'tone';
 import { useMasterControlStore, type TmasterControlStore } from 'bring/components/drumSequencer/masterControlStore';
-import SeqTest from 'bring/components/drumSequencer/SeqTest';
+
 import PadChordMachine from 'bring/components/padPiano/padMachine';
+import Navbar from 'bring/components/layout/Navbar';
 
 //TODO appropriate name for container
 export default function playgroundPage() {
