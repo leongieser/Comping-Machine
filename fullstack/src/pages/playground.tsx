@@ -32,9 +32,9 @@ const samples = [
       <Navbar/>
       <InstrumentLayout />
 
-      <PadChordMachine/>
+      {/* <PadChordMachine/>
 
-      <SampleSequencer/>
+      <SampleSequencer/> */}
 
     </Layout>
   )

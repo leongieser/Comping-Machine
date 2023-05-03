@@ -56,12 +56,12 @@ export const useMasterControlStore = create((set) => ({
   },
 
   setBpm: (bpm: number) => {
-    Tone.Transport.bpm.value = bpm;
+    Tone.Transport.bpm.value = Math.ceil(bpm);
     set({ bpm });
   },
 
   setGlobalVolume: (volume: number) => {
-    Tone.Destination.volume.value = volume;
+    Tone.Destination.volume.value = Math.ceil(volume);
     set({ globalVolume: volume });
   },
 }));

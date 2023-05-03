@@ -148,9 +148,9 @@ const PadChordMachine = () => {
 
   return (
     <>
-    <section className="flex flex-row ml-10 mt-10 mr-10 p-4 bg-gray-400 rounded shadow shadow-lg shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)]">
-      <div className="bg-slate-200 p-2 rounded shadow shadow-lg shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] w-40 h-24">
-        <span className="text-emerald-950 ">Pad Bank: </span>
+    <div className="flex flex-row p-4 bg-gray-400 rounded shadow shadow-lg shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)]">
+      <div className="bg-slate-200 p-2 rounded shadow shadow-lg shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] w-40">
+
         <select className="text-fuchsia-900 bg-fuchsia-100 w-18 rounded" onChange={handlePadChange}>
           {soundBank.map((pad) => (
               <option key={pad.name} value={pad.name}>
@@ -191,13 +191,7 @@ const PadChordMachine = () => {
             }
           </div>
         </div>
-
-
-      <PianoKeys />
-
-    </section>
-      <button disabled={false} onClick={() => togglePlaying()}>{isPlaying ? 'Stop' : 'Play'}</button>
-
+      </div>
     </>
   )
 }

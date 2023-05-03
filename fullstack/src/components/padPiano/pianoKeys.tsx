@@ -103,7 +103,7 @@ export default function PianoKeys() {
   }
   return (
     <>
-      <div className="pianoPage text-stone-300 rounded-md bg-slate-800 ml-8 p-3 w-[525px] float-right">
+      <div className="pianoPage text-stone-300 rounded-md bg-slate-800 ml-8 p-3 w-[525px]">
         <div className='flex flex-row mb-4 justify-between'>
           <h1 className=''>SYNTH</h1>
           <form className='justify-end'>
