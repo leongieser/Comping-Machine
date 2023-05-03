@@ -105,7 +105,7 @@ const SampleSequencer = ()  => {
 
   return (
     <div className={`boder border-black
-    flex justify-center items-center bg-zinc-800 p-5 rounded-md drop-shadow-md shadow-2xl  ${isPlaying ? "shadow-zinc-900/20" : "shadow-none"}`}>
+    flex justify-center items-center bg-zinc-800  bg-p-5 rounded-md drop-shadow-md shadow-2xl  ${isPlaying ? "shadow-zinc-900/20" : "shadow-none"}`}>
 
       {/* <div className="border p-1 ">
         <div className="h-6 font-normal text-sm">
@@ -119,7 +119,7 @@ const SampleSequencer = ()  => {
 
       </div> */}
 
-        <div id="drum-container" className="flex flex-col">
+        <div id="drum-container" className="flex flex-col p-3">
 
 
 
@@ -193,7 +193,7 @@ const SampleSequencer = ()  => {
                   <input
                   className="h-10 w-10 mr-2
                   bg-orange-200 rounded border-orange-400 text-orange-500 checked:ring-orange-900 opacity:70 checked:opacity-100 shadow shadow-md
-                  hover:bg-orange-300  checked:shadow-xl focus:border-1 shadow-orange-800 shadow-"
+                  hover:bg-orange-300 accent-transparent checked:shadow-xl focus:border-1 shadow-orange-800 shadow-"
                   key={id}
                   id={id}
                   type="checkbox"
