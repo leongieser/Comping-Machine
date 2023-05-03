@@ -104,8 +104,8 @@ const SampleSequencer = ()  => {
 
 
   return (
-    <div className={`boder border-black
-    flex justify-center items-center bg-zinc-800  bg-p-5 rounded-md drop-shadow-md shadow-2xl  ${isPlaying ? "shadow-zinc-900/20" : "shadow-none"}`}>
+    <div className={`border border-black
+    flex justify-center items-center bg-zinc-800 p-5 rounded-md drop-shadow-md shadow-2xl  ${isPlaying ? "shadow-zinc-900/20" : "shadow-none"}`}>
 
       {/* <div className="border p-1 ">
         <div className="h-6 font-normal text-sm">

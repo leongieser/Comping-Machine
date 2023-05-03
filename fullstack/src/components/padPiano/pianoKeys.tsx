@@ -106,21 +106,6 @@ export default function PianoKeys() {
       <div className="pianoPage text-stone-300 rounded-md bg-slate-800 ml-8 p-3 w-[525px]">
         <div className='flex flex-row mb-4 justify-between'>
           <h1 className=''>SYNTH</h1>
-          <form className='justify-end'>
-            <label >
-              Octave:
-              <select required
-                onChange={(e) => handleOctaveChange(Number(e.target.value))}
-                value="2"
-                name='octave' id='octave-root'
-                className='text-fuchsia-950 rounded-lg mx-2'>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-              </label>
-          </form>
         </div>
         <div className="flex flex-row justify-center text-center relative w-[500px]">
           <button
@@ -209,6 +194,22 @@ export default function PianoKeys() {
     <label className="text-center" htmlFor="keys-filter">Filter</label>
     <input type="range" name="keys-filter" id="keys-filter" />
   </div>
+  
+          <form className='justify-end'>
+            <label >
+              Octave:
+              <select required
+                onChange={(e) => handleOctaveChange(Number(e.target.value))}
+                value="2"
+                name='octave' id='octave-root'
+                className='text-fuchsia-950 rounded-lg mx-2'>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              </label>
+          </form>
 
   <div className='flex flex-col'>
     <label className="text-center" htmlFor="keys-effect" >another effect</label>
