@@ -2,22 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
+:root {
   --primary: rebeccapurple;
   --secondary: cornflowerblue;
-} */
-
-/* * {
-  outline: 1px solid olive;
-} */
-
-
- body {
-  background: black;
 }
 
-/*
-*::-webkit-scrollbar {
+/* * {
+  outline: 1px solid red;
+} */
+
+body {
+  background: rgba(0, 0, 0, 0.881);
+}
+
+/* *::-webkit-scrollbar {
   width: 15px;
 }
 

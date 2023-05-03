@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react'
-import PadMachine from '../padMachine';
+import PadMachine from '../padPiano/padMachine';
 
 export default function InstrumentLayout() {
   const {data} = useSession()

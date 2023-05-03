@@ -7,7 +7,7 @@ import SampleSequencer from 'bring/components/drumSequencer/SampleSequencer';
 import * as Tone from 'tone';
 import { useMasterControlStore, type TmasterControlStore } from 'bring/components/drumSequencer/masterControlStore';
 import SeqTest from 'bring/components/drumSequencer/SeqTest';
-import PadChordMachine from 'bring/components/padMachine';
+import PadChordMachine from 'bring/components/padPiano/padMachine';
 
 //TODO appropriate name for container
 export default function playgroundPage() {
