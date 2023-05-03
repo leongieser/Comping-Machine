@@ -103,97 +103,97 @@ export default function PianoKeys() {
   }
   return (
     <>
-      <div className="pianoPage text-stone-300 rounded-md bg-zinc-800 ml-8 p-3 w-[525px] border border-black ">
+      <div className="pianoPage text-stone-300 rounded-md bg-zinc-800 p-3 w-[525px] h-72 border border-black ">
         <div className='flex flex-row mb-4 justify-center'>
-          <h1 className=''>ASDFG 5000</h1>
+          <h1 className='text-lg font-bold'>SYNTHATIZER LEO 3000</h1>
         </div>
         <div className="flex flex-row justify-center text-center relative w-[500px]">
           <button
-            className="flex white-key bg-white text-black ml-1 h-40 w-[42px] rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] rounded-br-md rounded-bl-md items-end justify-center "
             onClick={() => playNoteByIndex(0)}
           >
-            A
+            <p className='mb-2'>A</p>
           </button>
           <button
             className="black-key bg-black text-white h-20 absolute left-2 w-[38px] left-[95px] rounded-br-lg rounded-bl-lg "
             onClick={() => playNoteByIndex(1)}
           >
-            W
+            <p className='mt-10'>W</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-40 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center"
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center"
             onClick={() => playNoteByIndex(2)}
           >
-            S
+            <p className='mb-2'>S</p>
           </button>
           <button
             className="black-key bg-black text-white  absolute left-2 w-[38px] h-20 left-[142px] rounded-br-lg rounded-bl-lg "
             onClick={() => playNoteByIndex(3)}
           >
-            E
+            <p className='mt-10'>E</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-40 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center"
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center"
             onClick={() => playNoteByIndex(4)}
           >
-            D
+            <p className='mb-2'>D</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-40 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
             onClick={() => playNoteByIndex(5)}
           >
-            F
+            <p className='mb-2'>F</p>
           </button>
           <button
             className="black-key bg-black text-white h-20 absolute left-2 w-[38px] left-[232px] rounded-br-lg rounded-bl-lg "
             onClick={() => playNoteByIndex(6)}
           >
-            T
+            <p className='mt-10'>T</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-40 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
             onClick={() => playNoteByIndex(7)}
           >
-            G
+            <p className='mb-2'>G</p>
           </button>
           <button
             className="black-key bg-black text-white h-20 absolute left-[279px] w-[38px] rounded-br-lg rounded-bl-lg "
             onClick={() => playNoteByIndex(8)}
           >
-            Y
+            <p className='mt-10'>Y</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-40 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
             onClick={() => playNoteByIndex(9)}
           >
-            H
+            <p className='mb-2'>H</p>
           </button>
           <button
             className="black-key bg-black text-white h-20 absolute left-[326px] w-[38px] rounded-br-lg rounded-bl-lg"
             onClick={() => playNoteByIndex(10)}
           >
-            U
+            <p className='mt-10'>U</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-40 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
             onClick={() => playNoteByIndex(11)}
           >
-            J
+            <p className='mb-2'>J</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-40 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
             onClick={() => playNoteByIndex(12)}
           >
-            K
+            <p className='mb-2'>K</p>
           </button>
 
         </div>
-<div className='flex justify-around mt-3 '>
+        <div className='flex justify-around mt-8 '>
 
-  <div className='flex flex-col'>
-    <label className="text-center" htmlFor="keys-filter">Filter</label>
-    <input type="range" name="keys-filter" id="keys-filter" />
-  </div>
+          <div className='flex flex-col'>
+            <label className="text-center mb-2" htmlFor="keys-filter">Filter</label>
+            <input type="range" name="keys-filter" id="keys-filter" className="cursor-pointer appearance-none bg-transparent [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black/25 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[15px] [&::-webkit-slider-thumb]:w-[15px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500" />
+          </div>
 
           <form className='justify-end'>
             <label >
@@ -209,11 +209,11 @@ export default function PianoKeys() {
               </label>
           </form>
 
-  <div className='flex flex-col'>
-    <label className="text-center" htmlFor="keys-effect" >another effect</label>
-    <input type="range" name="keys-effect" id="keys-effect" />
-  </div>
-</div>
+          <div className='flex flex-col'>
+            <label className="text-center mb-2" htmlFor="keys-effect" >Effect</label>
+            <input type="range" name="keys-effect" id="keys-effect" className="cursor-pointer appearance-none bg-transparent [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black/25 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[15px] [&::-webkit-slider-thumb]:w-[15px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500"/>
+          </div>
+        </div>
       </div>
     </>
   );

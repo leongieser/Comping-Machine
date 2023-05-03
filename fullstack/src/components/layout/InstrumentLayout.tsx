@@ -22,17 +22,18 @@ const {isPlaying, togglePlaying, bpm, setBpm, globalVolume, setGlobalVolume} = u
       <PadMachine />
     </section>
 
-    <section id="control-section mt-5" className="flex col-start-2 col-end-3 row-start-3 row-end-4">
-      <div className='w-full flex items-center justify-center'>
+    <section id="control-section" className="flex col-start-2 col-end-3 row-start-3 row-end-4 justify-center mb-5">
+      <div className='w-[900px] flex items-center bg-zinc-700 rounded'>
 
-      <button className={`border-2 border-zinc-950 flex items-center justify-center w-16 h-10 rounded-md bg-${isPlaying ? "red" : "green"}-300` } onClick={togglePlaying}>
+      <button className={`border-2 border-zinc-950 flex items-center justify-center w-16 h-10 ml-20 rounded-md ${isPlaying ? "bg-red-300" : "bg-green-300"}` } onClick={togglePlaying}>
         {isPlaying ? <PauseIcon style={{width: "20px", height: "20px", strokeWidth: "3px"}} /> : <PlayIcon style={{width: "20px", height: "20px", strokeWidth: "3px"}}/>}
         </button>
 
-      <label className='relative text-fuchsia-500 text-xl' >BPM: {bpm}
+    <div className='flex flex-row items-center ml-56'>
+      <label className='relative text-zinc-200 text-l' >BPM: {bpm}
 
         <input
-          className='w-[200px]'
+          className='w-[200px] ml-2 mb-2 cursor-pointer appearance-none bg-transparent [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black/25 [&::-webkit-slider-runnable-track]:h-[20px] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[20px] [&::-webkit-slider-thumb]:w-[20px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500'
           type='range'
           min={40}
           max={250}
@@ -41,10 +42,10 @@ const {isPlaying, togglePlaying, bpm, setBpm, globalVolume, setGlobalVolume} = u
           />
       </label>
 
-      <label className='relative text-fuchsia-500 text-xl opacity-80 ' >Master Vol: {Math.ceil(globalVolume * 100)}
+      <label className='relative text-zinc-200 text-l ' >Master Vol: {Math.ceil(globalVolume * 100)}
 
         <input
-          className='w-[200px]'
+          className='w-[200px] ml-2 mt-2 cursor-pointer appearance-none bg-transparent [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black/25 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[20px] [&::-webkit-slider-thumb]:w-[20px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500'
           type='range'
           min={0}
           max={1}
@@ -52,6 +53,7 @@ const {isPlaying, togglePlaying, bpm, setBpm, globalVolume, setGlobalVolume} = u
           onChange={(e) => setGlobalVolume(Number(e.target.value))} defaultValue={0.5}
           />
       </label>
+    </div>
 
            {/*
           <label className='relative text-fuchsia-500 text-xl opacity-80 '>

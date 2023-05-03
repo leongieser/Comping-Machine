@@ -151,7 +151,7 @@ const PadChordMachine = () => {
     <div className="flex justify-center items-center w-100 bg-zinc-800 border border-black p-8 rounded-md drop-shadow-sm shadow-2xl">
 
 
-        <select className="text-fuchsia-900 bg-fuchsia-100 w-18 rounded" onChange={handlePadChange}>
+        <select className="text-black-900 bg-zinc-100 w-18 h-14 rounded" onChange={handlePadChange}>
           {soundBank.map((pad) => (
               <option key={pad.name} value={pad.name}>
                 {pad.name}

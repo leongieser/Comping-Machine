@@ -10,7 +10,7 @@ function Navbar() {
 
 
   return (
-    <nav className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex flex-row justify-end h-16">
+    <nav className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-lg shadow-zinc-100/40 flex flex-row justify-end h-16">
       <div className="p-0 mr-2 text-gray-200">
         <ul className='flex flex-row'>
           <li className='flex items-center mr-2'><Link className="text-gray-200 flex items-center p-3 border border-slate-700 rounded-2xl h-8 bg-zinc-800" href={"/profile"}>Profile</Link></li>
