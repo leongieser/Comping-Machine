@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as Tone from "tone";
 import AudioBuffer  from 'tone';
+import { useMasterControlStore, type TmasterControlStore } from '../drumSequencer/masterControlStore';
 
 type Key = {
   key: string;
@@ -34,16 +35,18 @@ export default function PianoKeys() {
 
   const [octave, setOctave] = useState(2);
   const [synth, setSynth] = useState<Tone.Synth | null>(null);
-
+  const [synthLoaded, setSytnhLoaded] = useState(false);
+  const [frequency, setFrequency] = useState(50);
+  const {isPlaying} = useMasterControlStore() as TmasterControlStore;
   //useState(new Tone.Synth().toDestination());
 
   useEffect(() => {
 
     window.addEventListener("keydown", playNote);
-    window.addEventListener("keyup", stopNote);
+    // window.addEventListener("keyup", stopNote);
     return () => {
       window.removeEventListener("keydown", playNote);
-      window.removeEventListener("keyup", stopNote);
+      // window.removeEventListener("keyup", stopNote);
     };
 
   }, []);
@@ -60,24 +63,36 @@ export default function PianoKeys() {
     }
 
     triggerBuffer()
-  }, [])
+    setSytnhLoaded(true);
+    console.log("synth ready", synthLoaded);
+  }, [isPlaying])
+
+
+  const handleFreqChange = (val: number) => {
+    setFrequency(val)
+    synth.frequency.value = val
+  }
+
 
   function playNoteByKey (key: string) {
-    const keyObj = pianoKeys.find(k => k.key === key);
-    if (keyObj) {
+
+    const keyObj = pianoKeys.find(k => k.key === key);;
+    if (keyObj && synthLoaded) {
       const note = keyObj.note + keyObj.octave.toString() ;
+
       console.log("note", note); // DO NOT REMOVE
-      synth.triggerAttack(note, "8n");
-      synth.triggerRelease("+1")
+      synth.frequency.value = frequency
+      synth.triggerAttack(note, "8n", 0.5);
+
     }
   }
 
   function playNoteByIndex(index: number) {
     const keyObj = pianoKeys[index];
-    if (keyObj) {
+    if (keyObj && synthLoaded) {
       const note = keyObj.note + keyObj.octave.toString();
-      synth.envelope.decay = 0.1;
-      synth.envelope.attack = 0.3;
+      // synth.envelope.decay = 0.1;
+      // synth.envelope.attack = 0.3;
       synth.triggerAttackRelease(note, "8n");
     }
   }
@@ -191,8 +206,8 @@ export default function PianoKeys() {
         <div className='flex justify-around mt-8 '>
 
           <div className='flex flex-col'>
-            <label className="text-center mb-2" htmlFor="keys-filter">Filter</label>
-            <input type="range" name="keys-filter" id="keys-filter" className="cursor-pointer appearance-none bg-transparent [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black/25 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[15px] [&::-webkit-slider-thumb]:w-[15px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500" />
+            <label className="text-center mb-2" htmlFor="keys-filter">Frequency</label>
+            <input type="range" value={frequency} onChange={(e) => handleFreqChange(Number(e.target.value))} name="keys-filter" id="keys-filter" className="cursor-pointer appearance-none bg-transparent [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black/25 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[15px] [&::-webkit-slider-thumb]:w-[15px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500" />
           </div>
 
           <form className='justify-end'>

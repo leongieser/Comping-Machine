@@ -15,7 +15,7 @@ const SampleSequencer = ()  => {
   const { note, nOfSteps, isPlaying} = useMasterControlStore() as TmasterControlStore;
   const { selectedKit } = useSequencerStore() as TSequencerStore;
   const [ samplesLoaded, setSamplesLoaded ] = useState(false);
-  const [ shadow, setShadow ] = useState(false);
+
 
   const tracksRef = useRef<Track[]>([]);
   const stepsRef = useRef<HTMLInputElement[][]>([[]]);
@@ -90,9 +90,17 @@ const SampleSequencer = ()  => {
       );
 
       seqRef.current.start(0);
+
+
+
     };
 
     loadSamples();
+
+
+useEffect(() => {
+
+}, [drumsVolume]);
 
 
 
