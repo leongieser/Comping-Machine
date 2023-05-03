@@ -11,13 +11,9 @@ export type TKit = {
 export type TSequencerStore = {
   bars: number;
   selectedKit: TKit;
-  currentPatterns: boolean[][];
-  currentSequence: any; //TODO type this
 
   setBars: (bars: number) => void;
   setSelectedKit: (kit: TKit) => void;
-  updatePatternStep: (soundIndex: number, step: number, value: boolean) => void;
-  setCurrentSequence: (sequence: any) => void; //TODO type this
 };
 
 export const useSequencerStore = create((set) => ({
@@ -47,13 +43,6 @@ export const useSequencerStore = create((set) => ({
     ],
   },
 
-  // Fills a 2D array with false values that map to the current kit's sounds and the current number of bars * 16 steps
-  currentPatterns: (state: TSequencerStore) => {
-    [...Array(state.bars * 16)].map(() =>
-      [...Array(state.selectedKit.sounds.length)].fill(false)
-    );
-  },
-
   // Sets the number of bars - allows for a n of bars between 1 and 4 to avoid errors and performance issues
   setBars: (bars: number) => {
     if (bars >= 1 && bars <= 4) {
@@ -61,33 +50,5 @@ export const useSequencerStore = create((set) => ({
     }
   },
 
-  // Sets the selected kit and resets the current patterns to match the new kit
-  setSelectedKit: async (state: TSequencerStore, kit: TKit) => {
-    //? should the patterns be reset when the user selects a different sample kit?
-    //! yes - the new kid could potentially have more or less sounds than the previous one
-    const newPatterns = [...Array(kit.sounds.length)].map(() =>
-      [...Array(state.bars * 16)].fill(false)
-    );
-    set(() => ({ selectedKit: kit, currentPatterns: newPatterns }));
-  },
-
-  // Updates the value of a step in the current patterns array
-  updatePatternStep: (soundIndex: number, step: number, value: boolean) => {
-    set((state: TSequencerStore) => {
-      // Spreading the current state is required to create a shallow copy of the
-      // array to not mutate the original state which could lead to unexpected behaviour
-      const newPatterns = [...state.currentPatterns];
-      newPatterns[soundIndex] = [...newPatterns[soundIndex]];
-      newPatterns[soundIndex][step] = value;
-      console.log("state", state);
-
-      return { currentPatterns: newPatterns };
-    });
-  },
-
-  setCurrentSequence(sequence: any) {
-    set(() => ({ currentSequence: sequence }));
-  },
-
-  //TODO read up on zustands persist function to store state in the local storage
+  setSelectedKit: (kit: TKit) => set(() => ({ selectedKit: kit })),
 }));

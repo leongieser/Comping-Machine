@@ -13,7 +13,7 @@ export type Sound = {
 //   return { name, sounds };
 // };
 
-export async function getKit(name: string) {
+export function getKit(name: string) {
   let kit;
 
   if (name === "808 Kit") {

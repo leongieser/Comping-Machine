@@ -1,9 +1,9 @@
 import { useSequencerStore, type TSequencerStore } from './sequencerStore';
 
 const SampleRow = ({ sound, soundIndex }) => {
-  const { updatePatternStep } = useSequencerStore() as TSequencerStore;
+  const { updatePatternStep, currentPatterns } = useSequencerStore() as TSequencerStore;
 
-
+  const pattern = currentPatterns[soundIndex]
 
 
   const toggleStep = (stepIndex: number) => {

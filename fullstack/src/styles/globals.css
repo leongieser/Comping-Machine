@@ -7,14 +7,16 @@
   --secondary: cornflowerblue;
 } */
 
-* {
-  outline: 1px solid red;
-}
+/* * {
+  outline: 1px solid olive;
+} */
 
-/* body {
+
+ body {
   background: black;
 }
 
+/*
 *::-webkit-scrollbar {
   width: 15px;
 }

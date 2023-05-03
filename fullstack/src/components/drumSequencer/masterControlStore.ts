@@ -24,19 +24,26 @@ import * as Tone from "tone";
 
 export type TmasterControlStore = {
   isPlaying: boolean;
+  note: string;
   bpm: number;
   steps: number;
   globalVolume: number;
+  nOfSteps: number;
+
   togglePlaying: () => void;
   setBpm: (bpm: number) => void;
   setGlobalVolume: (volume: number) => void;
+  updateLamps: (step: number) => void;
 };
 
 export const useMasterControlStore = create((set) => ({
   isPlaying: false,
+  note: "C2",
   bpm: 120,
   steps: 16,
   globalVolume: 0.5,
+  nOfSteps: 16,
+
   togglePlaying: async () => {
     if (Tone.Transport.state === "started") {
       Tone.Transport.pause();
@@ -47,10 +54,12 @@ export const useMasterControlStore = create((set) => ({
       set({ isPlaying: true });
     }
   },
+
   setBpm: (bpm: number) => {
     Tone.Transport.bpm.value = bpm;
     set({ bpm });
   },
+
   setGlobalVolume: (volume: number) => {
     Tone.Destination.volume.value = volume;
     set({ globalVolume: volume });
