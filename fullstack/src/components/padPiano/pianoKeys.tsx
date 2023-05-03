@@ -65,7 +65,8 @@ export default function PianoKeys() {
   function playNoteByKey (key: string) {
     const keyObj = pianoKeys.find(k => k.key === key);
     if (keyObj) {
-      const note = keyObj.note + keyObj.octave.toString();
+      const note = keyObj.note + keyObj.octave.toString() ;
+      console.log("note", note); // DO NOT REMOVE
       synth.triggerAttack(note, "8n");
       synth.triggerRelease("+1")
     }
@@ -75,7 +76,9 @@ export default function PianoKeys() {
     const keyObj = pianoKeys[index];
     if (keyObj) {
       const note = keyObj.note + keyObj.octave.toString();
-      synth.triggerAttack(note, "8n");
+      synth.envelope.decay = 0.1;
+      synth.envelope.attack = 0.3;
+      synth.triggerAttackRelease(note, "8n");
     }
   }
 
