@@ -14,18 +14,20 @@ const {isPlaying, togglePlaying, bpm, setBpm, globalVolume, setGlobalVolume} = u
   return (
 
 
-    <div className='flex items-start'>
+    <div className='flex items-star'>
 
-    <div className="grid grid-cols-custom grid-rows-custom gap-0 bg-slate-700 w-full h-100">
+    <div className="grid grid-cols-custom grid-rows-custom gap-0 bg-zinc-900 w-full h-100 ">
 
-    <section id="pad-sequencer"className="col-start-2 col-end-3 row-start-2 row-end-3" >
-    <PadMachine />
+    <section id="pad-sequencer"className="flex justify-center items-centercol-start-2 col-end-3 row-start-2 row-end-3" >
+      <PadMachine />
     </section>
 
     <section id="control-section mt-5" className="flex col-start-2 col-end-3 row-start-3 row-end-4">
       <div className='w-full flex items-center justify-center'>
 
-      <button className=""onClick={togglePlaying}>{isPlaying ? <PauseIcon width={10} height={10}/> : <PlayIcon/>} </button>
+      <button className={`border-2 border-zinc-950 flex items-center justify-center w-16 h-10 rounded-md bg-${isPlaying ? "red" : "green"}-300` } onClick={togglePlaying}>
+        {isPlaying ? <PauseIcon style={{width: "20px", height: "20px", strokeWidth: "3px"}} /> : <PlayIcon style={{width: "20px", height: "20px", strokeWidth: "3px"}}/>}
+        </button>
 
       <label className='relative text-fuchsia-500 text-xl' >BPM: {bpm}
 
@@ -61,22 +63,22 @@ const {isPlaying, togglePlaying, bpm, setBpm, globalVolume, setGlobalVolume} = u
         </div>
     </section>
 
-    <section id="piano-keys" className="flex justify-center items-center col-start-3 col-end-4 row-start-2 row-end-3">
+    <section id="piano-keys" className="flex justify-center items-center col-start-3 col-end-4 row-start-2 row-end-4">
 
       <PianoKeys/>
     </section>
 
-    <section id="drum-sampler-selection" className=" flex items-center justify-center col-start-3 col-end-4 row-start-3 row-end-4">
+    {/* <section id="drum-sampler-selection" className=" flex items-center justify-center col-start-3 col-end-4 row-start-3 row-end-4">
           <div>placeholder for some funky stuff</div>
-    </section>
+    </section> */}
 
 
 
-    <section id="drum-sequencer" className="flex items-center justify-center col-start-2 col-end-3 row-start-4 row-end-6" >
+    <section id="drum-sequencer" className="flex items-center justify-center col-start-2 col-end-3 row-start-4 row-end-6 bg-zinc-900" >
     <SampleSequencer />
     </section>
-    <section id="drumpad-selection" className="col-start-3 col-end-4 row-start-4 row-end-6 flex items-center justify-center">
-      <div className='bg-teal-500 w-52 h-52'></div>
+    <section id="drumpad-selection" className="col-start-3 col-end-4 row-start-4 row-end-6 flex items-center justify-center bg-zinc-900">
+      <div className='bg-teal-500 w-[500px] h-[500px]'></div>
     </section>
 
     </div>

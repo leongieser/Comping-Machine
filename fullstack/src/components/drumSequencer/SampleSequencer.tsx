@@ -11,9 +11,10 @@ type Track = {
 const KEY = "C4"
 
 const SampleSequencer = ()  => {
-  const { note, nOfSteps} = useMasterControlStore() as TmasterControlStore;
+  const { note, nOfSteps, isPlaying} = useMasterControlStore() as TmasterControlStore;
   const { selectedKit } = useSequencerStore() as TSequencerStore;
   const [ samplesLoaded, setSamplesLoaded ] = useState(false);
+  const [ shadow, setShadow ] = useState(false);
 
   const tracksRef = useRef<Track[]>([]);
   const stepsRef = useRef<HTMLInputElement[][]>([[]]);
@@ -57,6 +58,7 @@ const SampleSequencer = ()  => {
           tracksRef.current.forEach((track) => {
             if (stepsRef.current[track.id]?.[step]?.checked) {
               track.sampler.triggerAttack(note, time);
+
             }
             lampsRef.current[step].checked = true;
           });
@@ -102,7 +104,8 @@ const SampleSequencer = ()  => {
 
 
   return (
-    <div className="flex justify-center items-center bg-zinc-900 border-2 w-2/3 p-5">
+    <div className={`boder border-black
+    flex justify-center items-center bg-zinc-800 p-5 rounded-md drop-shadow-md shadow-2xl  ${isPlaying ? "shadow-zinc-900/20" : "shadow-none"}`}>
 
       {/* <div className="border p-1 ">
         <div className="h-6 font-normal text-sm">
@@ -122,7 +125,7 @@ const SampleSequencer = ()  => {
 
 
 
-        <div className='flex justify-between h-11'>
+        <div className='flex h-11'>
 
         <div className='flex justify-between items-center w-[145px]'>
               <select className="w-[100px] ml-3 rounded text-center" name="" id="">
@@ -136,9 +139,9 @@ const SampleSequencer = ()  => {
               </button>
             </div>
 
-        <div id="lamp-container" className="flex justify-between items-center h-8 pr-1 mt-1.5">
-          {stepIds.slice(0, -1).map((stepId) => (
-            <label key={stepId} className="flex items-center justify-center ml-2 w-5 mr-3.5 rounded ">
+        <div id="lamp-container" className="flex items-center h-8  ml-[15px] mt-1.5">
+          {stepIds.map((stepId) => (
+            <label key={stepId} className="flex items-center justify-center ml-3.5 w-5 mr-3.5 rounded ">
               <input className="h-8 w-8 checked:opacity-100 focus:emerald-100"
                 type="radio"
                 name="lamp"
@@ -152,7 +155,7 @@ const SampleSequencer = ()  => {
                 />
             </label>
           ))}
-          { <label key={15} className="flex items-center justify-center ml-2 w-5 m-2 rounded ">
+          {/* { <label key={15} className="flex items-center justify-center w-5 m-3 rounded ">
               <input className="h-8 w-8 checked:opacity-100 focus:emerald-100"
                 type="radio"
                 name="lamp"
@@ -164,7 +167,7 @@ const SampleSequencer = ()  => {
                 }}
 
                 />
-            </label>}
+            </label>} */}
         </div>
         </div>
 
@@ -188,7 +191,7 @@ const SampleSequencer = ()  => {
                 const id = trackId + "-" + stepId;
                 return (
                   <input
-                  className="h-10 w-10 mr-0.5
+                  className="h-10 w-10 mr-2
                   bg-orange-200 rounded border-orange-400 text-orange-500 checked:ring-orange-900 opacity:70 checked:opacity-100 shadow shadow-md
                   hover:bg-orange-300  checked:shadow-xl focus:border-1 shadow-orange-800 shadow-"
                   key={id}

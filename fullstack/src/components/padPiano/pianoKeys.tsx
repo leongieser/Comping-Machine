@@ -203,6 +203,18 @@ export default function PianoKeys() {
           </button>
 
         </div>
+<div className='flex justify-around mt-3 '>
+
+  <div className='flex flex-col'>
+    <label className="text-center" htmlFor="keys-filter">Filter</label>
+    <input type="range" name="keys-filter" id="keys-filter" />
+  </div>
+
+  <div className='flex flex-col'>
+    <label className="text-center" htmlFor="keys-effect" >another effect</label>
+    <input type="range" name="keys-effect" id="keys-effect" />
+  </div>
+</div>
       </div>
     </>
   );

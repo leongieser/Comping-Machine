@@ -147,9 +147,9 @@ const PadChordMachine = () => {
   }
 
   return (
-    <>
-    <div className="flex flex-row p-4 bg-gray-400 rounded shadow shadow-lg shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)]">
-      <div className="bg-slate-200 p-2 rounded shadow shadow-lg shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] w-40">
+
+    <div className="flex justify-center items-center w-100 bg-zinc-800 p-5 rounded-md drop-shadow-sm shadow-2xl">
+
 
         <select className="text-fuchsia-900 bg-fuchsia-100 w-18 rounded" onChange={handlePadChange}>
           {soundBank.map((pad) => (
@@ -158,8 +158,8 @@ const PadChordMachine = () => {
               </option>
             ))}
         </select>
-      </div>
-      <div className="flex left-2 p-2 ml-10 rounded shadow shadow-lg shadow-gray-400 bg-violet-500/50 h-24">
+
+      <div className="flex left-2 p-2 ml-10 rounded shadow-lg shadow-gray-400 bg-violet-500/50 h-24">
           <span className="text-white text-md mr-2 mt-5 w-[50px]">Steps: </span>
 
           <div className="relative flex justify-between w-full mt-5">
@@ -169,8 +169,8 @@ const PadChordMachine = () => {
                 <div key={"seq"+i} className="relative">
                   <div key={"stepEl"+i} id={i.toString()}
                     onClick={(e) => handleStepClick(e)}
-                    className="inline shadow-[inset_0_-0.5px_4px_rgba(0,0,0,0.6)] hover:opacity-100 hover:bg-fuchsia-500 opacity-80 rounded min-w-[50px] h-fit ml-1.5 mr-1.5 text-center text-white bg-gray-500
-                    flex flex-col justify-between">
+                    className="shadow-[inset_0_-0.5px_4px_rgba(0,0,0,0.6)] hover:opacity-100 hover:bg-fuchsia-500 opacity-80 rounded min-w-[50px] h-fit ml-1.5 mr-1.5 text-center text-white bg-gray-500
+                     flex flex-col justify-between items-center">
                     {i + 1}
                   </div>
                   <div key={"buttonContainer"+i} className="">
@@ -192,7 +192,7 @@ const PadChordMachine = () => {
           </div>
         </div>
       </div>
-    </>
+
   )
 }
 
