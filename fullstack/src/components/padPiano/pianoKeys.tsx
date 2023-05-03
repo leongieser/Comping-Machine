@@ -103,9 +103,9 @@ export default function PianoKeys() {
   }
   return (
     <>
-      <div className="pianoPage text-stone-300 rounded-md bg-slate-800 ml-8 p-3 w-[525px]">
-        <div className='flex flex-row mb-4 justify-between'>
-          <h1 className=''>SYNTH</h1>
+      <div className="pianoPage text-stone-300 rounded-md bg-zinc-800 ml-8 p-3 w-[525px] border border-black ">
+        <div className='flex flex-row mb-4 justify-center'>
+          <h1 className=''>ASDFG 5000</h1>
         </div>
         <div className="flex flex-row justify-center text-center relative w-[500px]">
           <button
@@ -194,7 +194,7 @@ export default function PianoKeys() {
     <label className="text-center" htmlFor="keys-filter">Filter</label>
     <input type="range" name="keys-filter" id="keys-filter" />
   </div>
-  
+
           <form className='justify-end'>
             <label >
               Octave:

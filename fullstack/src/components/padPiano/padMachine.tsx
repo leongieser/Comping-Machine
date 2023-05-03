@@ -148,7 +148,7 @@ const PadChordMachine = () => {
 
   return (
 
-    <div className="flex justify-center items-center w-100 bg-zinc-800 border border-black p-5 rounded-md drop-shadow-sm shadow-2xl">
+    <div className="flex justify-center items-center w-100 bg-zinc-800 border border-black p-8 rounded-md drop-shadow-sm shadow-2xl">
 
 
         <select className="text-fuchsia-900 bg-fuchsia-100 w-18 rounded" onChange={handlePadChange}>
@@ -169,7 +169,7 @@ const PadChordMachine = () => {
                 <div key={"seq"+i} className="relative">
                   <div key={"stepEl"+i} id={i.toString()}
                     onClick={(e) => handleStepClick(e)}
-                    className="shadow-[inset_0_-0.5px_4px_rgba(0,0,0,0.6)] hover:opacity-100 hover:bg-fuchsia-500 opacity-80 rounded min-w-[50px] h-fit ml-1.5 mr-1.5 text-center text-white bg-gray-500
+                    className="shadow-[inset_0_-0.5px_4px_rgba(0,0,0,0.6)] hover:opacity-100 hover:bg-fuchsia-500 opacity-80 rounded min-w-[50px] ml-1.5 mr-1.5 text-center text-white bg-gray-500
                      flex flex-col justify-between items-center">
                     {i + 1}
                   </div>

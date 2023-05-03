@@ -10,12 +10,12 @@ function Navbar() {
 
 
   return (
-    <nav className="bg-neutral-800 flex flex-row justify-end h-16">
+    <nav className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex flex-row justify-end h-16">
       <div className="p-0 mr-2 text-gray-200">
         <ul className='flex flex-row'>
-          <li className='flex items-center mr-2'><Link className="text-gray-200 flex items-center p-3 border border-slate-700 rounded-2xl h-8" href={"/profile"}>Profile</Link></li>
+          <li className='flex items-center mr-2'><Link className="text-gray-200 flex items-center p-3 border border-slate-700 rounded-2xl h-8 bg-zinc-800" href={"/profile"}>Profile</Link></li>
           <li className='flex items-center mr-2'>
-            <button className="flex items-center p-3 border border-slate-700 rounded-2xl h-8" onClick={() => signOut({ callbackUrl: '/' })}>
+            <button className="flex items-center p-3 border border-slate-700 rounded-2xl h-8 bg-zinc-800" onClick={() => signOut({ callbackUrl: '/' })}>
               Log Out
             </button>
           </li>
