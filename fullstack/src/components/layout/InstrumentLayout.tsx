@@ -25,7 +25,7 @@ const {isPlaying, togglePlaying, bpm, setBpm, globalVolume, setGlobalVolume} = u
     <section id="control-section mt-5" className="flex col-start-2 col-end-3 row-start-3 row-end-4">
       <div className='w-full flex items-center justify-center'>
 
-      <button className={`border-2 border-zinc-950 flex items-center justify-center w-16 h-10 rounded-md bg-${isPlaying ? "red" : "green"}-300` } onClick={togglePlaying}>
+      <button className={`border-2 border-zinc-950 flex items-center justify-center w-16 h-10 rounded-md bg-${isPlaying ? "red" : "green"}-400` } onClick={togglePlaying}>
         {isPlaying ? <PauseIcon style={{width: "20px", height: "20px", strokeWidth: "3px"}} /> : <PlayIcon style={{width: "20px", height: "20px", strokeWidth: "3px"}}/>}
         </button>
 

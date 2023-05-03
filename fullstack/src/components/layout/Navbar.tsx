@@ -10,10 +10,10 @@ function Navbar() {
   console.log({user});
 
   return (
-    <nav className="bg-red-200 flex flex-row justify-end">
-      <div className="p-0 mr-2">
+    <nav className="bg-neutral-800 flex flex-row justify-end h-16  ">
+      <div className="p-0 mr-2 text-gray-200">
         <ul className='flex flex-row'>
-          <li className='flex items-center mr-2'><Link className="flex items-center p-3 border border-slate-700 rounded-2xl h-8" href={"/profile"}>Profile</Link></li>
+          <li className='flex items-center mr-2'><Link className="text-gray-200 flex items-center p-3 border border-slate-700 rounded-2xl h-8" href={"/profile"}>Profile</Link></li>
           <li className='flex items-center mr-2'>
             <button className="flex items-center p-3 border border-slate-700 rounded-2xl h-8" onClick={() => signOut({ callbackUrl: '/' })}>
               Log Out

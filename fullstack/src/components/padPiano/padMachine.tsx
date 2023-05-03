@@ -148,7 +148,7 @@ const PadChordMachine = () => {
 
   return (
 
-    <div className="flex justify-center items-center w-100 bg-zinc-800 p-5 rounded-md drop-shadow-sm shadow-2xl">
+    <div className="flex justify-center items-center w-100 bg-zinc-800 border border-black p-5 rounded-md drop-shadow-sm shadow-2xl">
 
 
         <select className="text-fuchsia-900 bg-fuchsia-100 w-18 rounded" onChange={handlePadChange}>
@@ -159,10 +159,10 @@ const PadChordMachine = () => {
             ))}
         </select>
 
-      <div className="flex left-2 p-2 ml-10 rounded shadow-lg shadow-gray-400 bg-violet-500/50 h-24">
-          <span className="text-white text-md mr-2 mt-5 w-[50px]">Steps: </span>
+      <div className="flex left-2 p-2 ml-10 rounded bg-gray-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 h-24 border border-zinc-400 items-center">
+          <span className="text-white text-md mr-2 items-center w-[50px]">Steps: </span>
 
-          <div className="relative flex justify-between w-full mt-5">
+          <div className="relative flex justify-between w-full">
             {seq.map((_, i) => {
 
             return (
