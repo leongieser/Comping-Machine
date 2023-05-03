@@ -10,7 +10,7 @@ function LandingPage() {
   //TODO Styling
   return (
   <div className='flex flex-col justify-center items-center h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
-    <Image src={logoTransparent} width={1500} height={1500} alt="comping-machine-logo"/>
+    <Image src={easterEgg} width={1000} height={1000} alt="comping-machine-logo"/>
     <h1 className='mt-12 mb-12'>Jam right in your browser</h1>
     <button className="bg-zinc-200  border-white opacity-30 w-52 h-16 rounded-xl font-semibold text-xl" onClick={() => signIn( undefined, { callbackUrl: '/playground' })}>Get started</button>
   </div>
