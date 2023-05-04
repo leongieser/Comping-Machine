@@ -51,6 +51,7 @@ export const useMasterControlStore = create((set) => ({
   steps: 16,
   globalVolume: 0.5,
   nOfSteps: 16,
+  keysVolume: 0.5,
 
   togglePlaying: async () => {
     if (Tone.Transport.state === "started") {

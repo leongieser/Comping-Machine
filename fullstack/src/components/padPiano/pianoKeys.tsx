@@ -43,10 +43,10 @@ export default function PianoKeys() {
   useEffect(() => {
 
     window.addEventListener("keydown", playNote);
-    // window.addEventListener("keyup", stopNote);
+    window.addEventListener("keyup", stopNote);
     return () => {
       window.removeEventListener("keydown", playNote);
-      // window.removeEventListener("keyup", stopNote);
+      window.removeEventListener("keyup", stopNote);
     };
 
   }, []);
@@ -87,11 +87,16 @@ export default function PianoKeys() {
     await Tone.start();
     const keyObj = pianoKeys.find(k => k.key === key);;
     if (keyObj && synthLoaded) {
-      const note = keyObj.note + keyObj.octave.toString() ;
+
+      const note = keyObj.note + keyObj.octave.toString();
 
       console.log("note", note); // DO NOT REMOVE
-      synth.frequency.value = frequency
-      synth.triggerAttack(note, "1n");
+      // synth.frequency.value = frequency
+      // synth.triggerAttack(note, "1n");
+
+            // synth.envelope.attack = 0.3;
+      synth.envelope.decay = 0.2;
+      synth.triggerAttack(note, "8n");
 
     }
   }
@@ -101,8 +106,10 @@ export default function PianoKeys() {
     const keyObj = pianoKeys[index];
     if (keyObj && synthLoaded) {
       const note = keyObj.note + keyObj.octave.toString();
-      // synth.envelope.decay = 0.1;
-      // synth.envelope.attack = 0.3;
+
+
+
+      synth.frequency.value = frequency
       synth.triggerAttackRelease(note, "8n");
     }
   }
@@ -116,7 +123,7 @@ export default function PianoKeys() {
   }
 
   function stopNote() {
-    synth.triggerRelease();
+    synth.triggerRelease("4n");
   }
 
   function handleOctaveChange(newOctave: number) {
