@@ -12,7 +12,7 @@ type Track = {
 const KEY = "C4"
 
 const SampleSequencer = ()  => {
-  const { note, nOfSteps, isPlaying} = useMasterControlStore() as TmasterControlStore;
+  const { note, nOfSteps, isPlaying, drumsVolume} = useMasterControlStore() as TmasterControlStore;
   const { selectedKit } = useSequencerStore() as TSequencerStore;
   const [ samplesLoaded, setSamplesLoaded ] = useState(false);
 
@@ -100,9 +100,7 @@ const SampleSequencer = ()  => {
     loadSamples();
 
 
-useEffect(() => {
 
-}, [drumsVolume]);
 
 
 
@@ -113,6 +111,14 @@ useEffect(() => {
       tracksRef.current.forEach((trk) => void trk.sampler.dispose());
     };
   }, [selectedKit.sounds, nOfSteps]);
+
+  useEffect(() => {
+    tracksRef.current.forEach((track) => {
+      track.sampler.volume.value = drumsVolume;
+    }
+
+    );
+  }, [drumsVolume]);
 
 
   // const muteTrack = (e) => {
@@ -174,9 +180,9 @@ useEffect(() => {
             </div>
 
         <div id="lamp-container" className="flex items-center h-8  ml-[15px] mt-1.5">
-          {stepIds.map((stepId) => (
-            <label key={stepId} className="flex items-center justify-center ml-3.5 w-5 mr-3.5 rounded ">
-              <input className="h-8 w-8 checked:opacity-100 focus:emerald-100"
+          {stepIds.map((stepId, i) => (
+            <label key={stepId + "-l" + i} className="flex items-center justify-center ml-3.5 w-5 mr-3.5 rounded ">
+              <input key={stepId + "-i" + i}className="h-8 w-8 checked:opacity-100 focus:emerald-100"
                 type="radio"
                 name="lamp"
                 id={"lamp" + "-" + stepId}
@@ -189,26 +195,14 @@ useEffect(() => {
                 />
             </label>
           ))}
-          {/* { <label key={15} className="flex items-center justify-center w-5 m-3 rounded ">
-              <input className="h-8 w-8 checked:opacity-100 focus:emerald-100"
-                type="radio"
-                name="lamp"
-                id={"lamp" + "-" + 15}
-                disabled
-                ref={(elm) => {
-                  if (!elm) return;
-                  lampsRef.current[15] = elm;
-                }}
-
-                />
-            </label>} */}
         </div>
         </div>
 
 
           {trackIds.map((trackId, i) => (
-            <div className='my-1.5 flex'>
+            <div key={trackId + "-db-" + i} className='my-1.5 flex'>
               <button
+                key={trackId + "-b-" + i}
                 id={trackId.toString()}
                 onClick={(e) => { muteTrack(e), { passive: true } }} // passive true... Very nice feature!
                 className="text-emerald-100 text-sm flex flex-col justify-center items-center

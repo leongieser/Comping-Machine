@@ -29,11 +29,19 @@ export type TmasterControlStore = {
   steps: number;
   globalVolume: number;
   nOfSteps: number;
+  keysVolume: number;
+  chordsVolume: number;
+  drumsVolume: number;
+  padsVolume: number;
 
   togglePlaying: () => void;
   setBpm: (bpm: number) => void;
   setGlobalVolume: (volume: number) => void;
   updateLamps: (step: number) => void;
+  setKeysVolume: (volume: number) => void;
+  setChordsVolume: (volume: number) => void;
+  setDrumsVolume: (volume: number) => void;
+  setPadsVolume: (volume: number) => void;
 };
 
 export const useMasterControlStore = create((set) => ({
@@ -64,4 +72,9 @@ export const useMasterControlStore = create((set) => ({
     Tone.Destination.volume.value = Math.ceil(volume);
     set({ globalVolume: volume });
   },
+
+  setKeysVolume: (volume: number) => set({ keysVolume: volume }),
+  setChordsVolume: (volume: number) => set({ chordsVolume: volume }),
+  setDrumsVolume: (volume: number) => set({ drumsVolume: volume }),
+  setPadsVolume: (volume: number) => set({ padsVolume: volume }),
 }));

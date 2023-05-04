@@ -33,12 +33,12 @@ type Synth = {
 
 export default function PianoKeys() {
 
-  const [octave, setOctave] = useState(2);
-  const [synth, setSynth] = useState<Tone.Synth | null>(null);
-  const [synthLoaded, setSytnhLoaded] = useState(false);
-  const [frequency, setFrequency] = useState(50);
-  const {isPlaying} = useMasterControlStore() as TmasterControlStore;
-  //useState(new Tone.Synth().toDestination());
+  const [ octave, setOctave ] = useState(2);
+  const [ synth, setSynth ] = useState<Tone.Synth | null>(null);
+  const [ synthLoaded, setSytnhLoaded ] = useState(false);
+  const [ frequency, setFrequency ] = useState(50);
+  const { isPlaying, keysVolume } = useMasterControlStore() as TmasterControlStore;
+
 
   useEffect(() => {
 
@@ -59,14 +59,23 @@ export default function PianoKeys() {
         resolve(sampler);
       })
       await Tone.start();
+
       setSynth(synth as Tone.Synth);
     }
 
     triggerBuffer()
+
     setSytnhLoaded(true);
+
     console.log("synth ready", synthLoaded);
   }, [isPlaying])
 
+
+  useEffect(() => {
+    if (synthLoaded) {
+      synth.volume.value = keysVolume;
+    }
+  }, [keysVolume])
 
   const handleFreqChange = (val: number) => {
     setFrequency(val)
@@ -74,20 +83,21 @@ export default function PianoKeys() {
   }
 
 
-  function playNoteByKey (key: string) {
-
+  async function playNoteByKey (key: string) {
+    await Tone.start();
     const keyObj = pianoKeys.find(k => k.key === key);;
     if (keyObj && synthLoaded) {
       const note = keyObj.note + keyObj.octave.toString() ;
 
       console.log("note", note); // DO NOT REMOVE
       synth.frequency.value = frequency
-      synth.triggerAttack(note, "8n", 0.5);
+      synth.triggerAttack(note, "1n");
 
     }
   }
 
-  function playNoteByIndex(index: number) {
+  async function playNoteByIndex(index: number) {
+    await Tone.start();
     const keyObj = pianoKeys[index];
     if (keyObj && synthLoaded) {
       const note = keyObj.note + keyObj.octave.toString();
@@ -124,79 +134,79 @@ export default function PianoKeys() {
         </div>
         <div className="flex flex-row justify-center text-center relative w-[500px]">
           <button
-            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] rounded-br-md rounded-bl-md items-end justify-center shadow-xl transition-all duration-150 focus:outline-none piano-key"
             onClick={() => playNoteByIndex(0)}
           >
             <p className='mb-2'>A</p>
           </button>
           <button
-            className="black-key bg-black text-white h-20 absolute left-2 w-[38px] left-[95px] rounded-br-lg rounded-bl-lg "
+            className="black-key bg-black text-white h-20 absolute left-2 w-[38px] left-[95px] rounded-br-lg rounded-bl-lg shadow-xl transition-all duration-150 focus:outline-none piano-key z-50"
             onClick={() => playNoteByIndex(1)}
           >
             <p className='mt-10'>W</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center"
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center shadow-xl transition-all duration-150 focus:outline-none piano-key"
             onClick={() => playNoteByIndex(2)}
           >
             <p className='mb-2'>S</p>
           </button>
           <button
-            className="black-key bg-black text-white  absolute left-2 w-[38px] h-20 left-[142px] rounded-br-lg rounded-bl-lg "
+            className="black-key bg-black text-white  absolute left-2 w-[38px] h-20 left-[142px] rounded-br-lg rounded-bl-lg shadow-xl transition-all duration-150 focus:outline-none piano-key z-50"
             onClick={() => playNoteByIndex(3)}
           >
             <p className='mt-10'>E</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center"
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center shadow-xl transition-all duration-150 focus:outline-none piano-key"
             onClick={() => playNoteByIndex(4)}
           >
             <p className='mb-2'>D</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center shadow-xl transition-all duration-150 focus:outline-none piano-key"
             onClick={() => playNoteByIndex(5)}
           >
             <p className='mb-2'>F</p>
           </button>
           <button
-            className="black-key bg-black text-white h-20 absolute left-2 w-[38px] left-[232px] rounded-br-lg rounded-bl-lg "
+            className="black-key bg-black text-white h-20 absolute left-2 w-[38px] left-[232px] rounded-br-lg rounded-bl-lg shadow-xl transition-all duration-150 focus:outline-none piano-key z-50"
             onClick={() => playNoteByIndex(6)}
           >
             <p className='mt-10'>T</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center shadow-xl transition-all duration-150 focus:outline-none piano-key"
             onClick={() => playNoteByIndex(7)}
           >
             <p className='mb-2'>G</p>
           </button>
           <button
-            className="black-key bg-black text-white h-20 absolute left-[279px] w-[38px] rounded-br-lg rounded-bl-lg "
+            className="black-key bg-black text-white h-20 absolute left-[279px] w-[38px] rounded-br-lg rounded-bl-lg shadow-xl transition-all duration-150 focus:outline-none piano-key z-50"
             onClick={() => playNoteByIndex(8)}
           >
             <p className='mt-10'>Y</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center shadow-xl transition-all duration-150 focus:outline-none piano-key"
             onClick={() => playNoteByIndex(9)}
           >
             <p className='mb-2'>H</p>
           </button>
           <button
-            className="black-key bg-black text-white h-20 absolute left-[326px] w-[38px] rounded-br-lg rounded-bl-lg"
+            className="black-key bg-black text-white h-20 absolute left-[326px] w-[38px] rounded-br-lg rounded-bl-lg shadow-xl transition-all duration-150 focus:outline-none piano-key z-50"
             onClick={() => playNoteByIndex(10)}
           >
             <p className='mt-10'>U</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center shadow-xl transition-all duration-150 focus:outline-none piano-key"
             onClick={() => playNoteByIndex(11)}
           >
             <p className='mb-2'>J</p>
           </button>
           <button
-            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center "
+            className="flex white-key bg-white text-black ml-1 h-36 w-[42px] w-8 h-16 rounded-br-md rounded-bl-md items-end justify-center shadow-xl transition-all duration-150 focus:outline-none piano-key"
             onClick={() => playNoteByIndex(12)}
           >
             <p className='mb-2'>K</p>
