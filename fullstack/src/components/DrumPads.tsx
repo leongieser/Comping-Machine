@@ -13,7 +13,8 @@ function App() {
   return (
 
 
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap border border-black w-full
+     bg-zinc-800 rounded-md drop-shadow-md shadow-2xl">
               {kit
                 ? kit.sounds.map((sampleUrl, index) => (
                     <div key={index} className="w-1/4 p-1">

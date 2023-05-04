@@ -39,14 +39,13 @@ export default function PianoKeys() {
   const [ frequency, setFrequency ] = useState(50);
   const { isPlaying, keysVolume } = useMasterControlStore() as TmasterControlStore;
 
-
   useEffect(() => {
 
     window.addEventListener("keydown", playNote);
-    window.addEventListener("keyup", stopNote);
+    // window.addEventListener("keyup", stopNote);
     return () => {
       window.removeEventListener("keydown", playNote);
-      window.removeEventListener("keyup", stopNote);
+      // window.removeEventListener("keyup", stopNote);
     };
 
   }, []);
@@ -55,27 +54,24 @@ export default function PianoKeys() {
     const triggerBuffer = async () => {
       const synth = await new Promise((resolve) => {
         const sampler = new Tone.Synth().toDestination();
-
         resolve(sampler);
       })
       await Tone.start();
-
       setSynth(synth as Tone.Synth);
     }
 
     triggerBuffer()
-
     setSytnhLoaded(true);
 
-    console.log("synth ready", synthLoaded);
+    console.log("synth ready", synthLoaded)
   }, [isPlaying])
 
 
-  useEffect(() => {
-    if (synthLoaded) {
-      synth.volume.value = keysVolume;
-    }
-  }, [keysVolume])
+  // useEffect(() => {
+  //   if (synthLoaded) {
+  //     synth.volume.value = keysVolume;
+  //   }
+  // }, [keysVolume])
 
   const handleFreqChange = (val: number) => {
     setFrequency(val)
@@ -88,16 +84,21 @@ export default function PianoKeys() {
     const keyObj = pianoKeys.find(k => k.key === key);;
     if (keyObj && synthLoaded) {
 
-      const note = keyObj.note + keyObj.octave.toString();
+      // const note = keyObj.note + keyObj.octave.toString();
 
-      console.log("note", note); // DO NOT REMOVE
-      // synth.frequency.value = frequency
-      // synth.triggerAttack(note, "1n");
+      // console.log("note", note); // DO NOT REMOVE
+      // // synth.frequency.value = frequency
+      // // synth.triggerAttack(note, "1n");
 
-            // synth.envelope.attack = 0.3;
-      synth.envelope.decay = 0.2;
-      synth.triggerAttack(note, "8n");
+      //       // synth.envelope.attack = 0.3;
+      // synth.envelope.decay = 1;
+      // synth.triggerAttack(note, "8n");
+      const note = keyObj.note + keyObj.octave.toString()
 
+
+
+
+      synth.triggerAttackRelease(note, "8n");
     }
   }
 
@@ -123,8 +124,10 @@ export default function PianoKeys() {
   }
 
   function stopNote() {
-    synth.triggerRelease("4n");
-  }
+    // if (synthLoaded) {
+    // synth.triggerRelease("1");
+  // }
+}
 
   function handleOctaveChange(newOctave: number) {
     const newKeys = [...pianoKeys];
