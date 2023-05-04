@@ -16,9 +16,7 @@ const SampleSequencer = ()  => {
   const { selectedKit } = useSequencerStore() as TSequencerStore;
   const [ samplesLoaded, setSamplesLoaded ] = useState(false);
 
-  //!TEMP TO REMOVE
-  const drumsVolume = useState(0);
-  
+
   const tracksRef = useRef<Track[]>([]);
   const stepsRef = useRef<HTMLInputElement[][]>([[]]);
   const lampsRef = useRef<HTMLInputElement[]>([]);

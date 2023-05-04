@@ -7,6 +7,7 @@ import useUser from '../../Hooks/useUser';
 
 
 
+
 export default function profile() {
   const { user, loading } = useUser()
 

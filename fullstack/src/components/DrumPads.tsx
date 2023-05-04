@@ -12,19 +12,21 @@ function App() {
 
   return (
 
+<div className=''>
 
     <div className="flex flex-wrap border border-black w-full
-     bg-zinc-800 rounded-md drop-shadow-md shadow-2xl">
+     bg-zinc-800 rounded-md drop-shadow-md shadow-2xl ">
               {kit
                 ? kit.sounds.map((sampleUrl, index) => (
-                    <div key={index} className="w-1/4 p-1">
-                      <div className="h-32 w-32">
+                  <div key={index} className="w-1/4">
+                      <div className="p-2">
                         <DrumPad sampleUrl={sampleUrl}  />
                       </div>
                     </div>
                   ))
-                 : null}
+                  : null}
       </div>
+                  </div>
   );
 }
 

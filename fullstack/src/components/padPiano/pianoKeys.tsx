@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import * as Tone from "tone";
 import AudioBuffer  from 'tone';
@@ -53,7 +55,12 @@ export default function PianoKeys() {
   useEffect(() => {
     const triggerBuffer = async () => {
       const synth = await new Promise((resolve) => {
-        const sampler = new Tone.Synth().toDestination();
+        const sampler = new Tone.Synth().toDestination()
+        // remove this semicolon and save the file after the app has loaded
+
+        //  ^ magical semicolon
+        //    best guess is that tonejs and next are somehow conflicting
+        //    since tonejs is supposed to be loaded before the app starts
         resolve(sampler);
       })
       await Tone.start();
