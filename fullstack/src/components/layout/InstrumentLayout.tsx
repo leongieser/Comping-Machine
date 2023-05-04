@@ -4,6 +4,9 @@ import SampleSequencer from '../drumSequencer/SampleSequencer';
 import { useMasterControlStore, type TmasterControlStore } from '../drumSequencer/masterControlStore';
 import { PlayIcon, PauseIcon } from '@radix-ui/react-icons';
 import PianoKeys from '../padPiano/pianoKeys';
+import DrumPads from "../DrumPads"
+
+
 export default function InstrumentLayout() {
   const {data} = useSession()
   console.log("data from app", data);
@@ -79,8 +82,8 @@ const {isPlaying, togglePlaying, bpm, setBpm, globalVolume, setGlobalVolume} = u
     <section id="drum-sequencer" className="flex items-center justify-center col-start-2 col-end-3 row-start-4 row-end-6 bg-zinc-900" >
     <SampleSequencer />
     </section>
-    <section id="drumpad-selection" className="col-start-3 col-end-4 row-start-4 row-end-6 flex items-center justify-center bg-zinc-900">
-      <div className='bg-teal-500 w-[500px] h-[500px]'></div>
+    <section id="drumpad-selection" className="col-start-3 col-end-4 row-start-4 row-end-6 flex items-center justify-center bg-zinc-900 w-[525px] border-white">
+      <DrumPads/>
     </section>
 
     </div>

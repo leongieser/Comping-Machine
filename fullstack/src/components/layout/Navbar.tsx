@@ -12,7 +12,7 @@ function Navbar() {
 
   return (
     <nav className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-lg shadow-zinc-100/40 flex flex-row justify-between h-16">
-       <Image className="ml-4" src={realLogo} alt="logo" width={86} height={86}></Image>
+       <Image className="ml-4" src={realLogo} alt="logo" width={94} height={94}></Image>
       <div className="p-0 mr-2 text-gray-200">
 
         <ul className='flex flex-row justify-between'>
