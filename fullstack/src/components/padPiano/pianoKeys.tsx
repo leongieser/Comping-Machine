@@ -57,12 +57,13 @@ export default function PianoKeys() {
       const synth = await new Promise((resolve) => {
         const sampler = new Tone.Synth().toDestination()
         // remove this semicolon and save the file after the app has loaded
-
+            ;
         //  ^ magical semicolon
         //    best guess is that tonejs and next are somehow conflicting
-        //    since tonejs is supposed to be loaded before the app starts
+        //    since tonejs is supposed to be loaded in the browser and not be shipped from from the backend
         resolve(sampler);
       })
+
       await Tone.start();
       setSynth(synth as Tone.Synth);
     }
@@ -71,7 +72,7 @@ export default function PianoKeys() {
     setSytnhLoaded(true);
 
     console.log("synth ready", synthLoaded)
-  }, [isPlaying])
+  }, [])
 
 
   // useEffect(() => {
